@@ -7,5 +7,6 @@ export default defineConfig({
   server:{
     host:'192.168.66.16',
     port: 5173,
-  }
+  },
+  base: '/myResume/',
 })

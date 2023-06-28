@@ -87,7 +87,7 @@ onMounted(()=>{
     //****myExp
     if(exp0.value.getBoundingClientRect().top < window.innerHeight*2/3){
       myExp.exp0= true
-      changeText('您好，我是祺翔，對於前端網頁設計開發有高度興趣，具一年以上前端網頁自學經驗，讓我養成獨立解決問題的能力；結合攝影及多媒體影像處理專長，目前已從無到有獨立完成數個RWD Website/APP（敬請參考下方作品集與本網站），在前一份工作中也有維護管理網站經驗，並具備後端PHP與資料庫基礎知識，個性圓融合群，有自信能在團隊中能快速進入狀況並達成交付任務。', 100, 30, 120)
+      changeText('您好，我是祺翔，對於前端網頁設計開發有高度興趣，具一年以上前端網頁自學與開發經驗，讓我養成獨立解決問題的能力；結合攝影及多媒體影像處理專長，目前已從零到有獨立完成數個RWD Website/APP（敬請參考下方作品集與本網站），在前一份工作中也有維護管理網站經驗，並具備後端PHP與資料庫基礎知識，個性圓融合群，有信心能在團隊中快速進入狀況為公司貢獻所長。', 100, 30, 120)
     }
     if(exp1.value.getBoundingClientRect().top < window.innerHeight*2/3){
       myExp.exp1= true
@@ -151,7 +151,7 @@ onMounted(()=>{
             <div class="txt">Hi!</div>    
         </div>
         <div class="user remote" :class="{active:chatboxToggle.item3}">
-            <div class="txt">聽說你們在徵前端工程師?</div>    
+            <div class="txt">聽說你們在徵<span class="red">前端工程師</span>?</div>    
         </div>
         <div class="user local" :class="{active:chatboxToggle.item4}">
             <div class="txt">對，沒錯!</div>    
@@ -190,31 +190,78 @@ onMounted(()=>{
             </div>
           </div>
         </div>
-        <div class="exp1" ref="exp1" :class="{active:myExp.exp1}">
+        <div class="exp3" ref="exp3" :class="{active:myExp.exp3}">
           <div class="exp_top">
-            <div class="top_left"><i class="fa-regular fa-folder-open"></i></div>
-            <div class="top_right"><h3>經歷及技能</h3></div>
+            <div class="top_left"><i class="fa-brands fa-github"></i></div>
+            <div class="top_right"><h3>近期作品 - 甜點購物網站APP</h3></div>
           </div>
           <div class="exp_bottom">
             <div class="bottom_left"></div>
             <div class="bottom_right">
-              <ul>
-                <span>經歷</span>
-                <li>● 中華民國藥師公會全聯會/資訊專員/11年
-                  <p>主要工作內容：</p>
-                  <p>官方網站維護管理</p>
-                  <p>資訊機房管理</p>
-                  <p>辦公室電腦軟硬體維護管理</p>
-                  <p>資訊軟硬體評估、規劃、採購</p>
-                </li>
-                <span>技能</span>
-                <li>● 前端網頁開發</li>
-                <li>● 美食、商品攝影</li>
-                <li>● 影片拍攝及剪輯</li>
-              </ul>
-              <div class="img">
-                <img src="./assets/certificate.jpg" alt="">
+              <div class="buttons">
+                <a href="https://github.com/shiang0504/dessert-shop">
+                  <div class="title">GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+                <a href="https://shiang0504.github.io/dessert-shop">
+                  <div class="title">DEMO <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
               </div>
+              <div class="image">
+                <img target=_blank src="./assets/dessert-shop.jpg" alt="甜點店">
+              </div>
+              <p>使用Vue3 Composition API、Vite、SCSS開發，</p>
+              <p>資料驅動畫面的SPA應用，以及UX、RWD響應式設計及切版練習，</p>
+              <p>搭配hashchange事件做簡單的頁面路由，實現每項商品具有獨立網址的效果。</p>
+            </div>
+          </div>
+        </div>
+        <div class="exp4" ref="exp4" :class="{active:myExp.exp4}">
+          <div class="exp_top">
+            <div class="top_left"><i class="fa-brands fa-github"></i></div>
+            <div class="top_right"><h3>近期作品 - 行事曆APP</h3></div>
+          </div>
+          <div class="exp_bottom">
+            <div class="bottom_left"></div>
+            <div class="bottom_right">
+              <div class="buttons">
+                <a href="https://github.com/shiang0504/calender-project">
+                  <div class="title">GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+                <a href="https://shiang0504.github.io/calender-project">
+                  <div class="title">DEMO <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+              </div>
+              <div class="image">
+                <img target=_blank src="./assets/calender-project.jpg" alt="萬年曆">
+              </div>
+              <p>使用Vue3 Composition API、Vite、SCSS開發，</p>
+              <p>簡易版本的google日曆，並串接OpenWeather API天氣預報，</p>
+              <p>RWD響應式設計，支援觸控手勢操作(滑動切換行事曆年、月份)。</p>
+            </div>
+          </div>
+        </div>
+        <div class="exp5" ref="exp5" :class="{active:myExp.exp5}">
+          <div class="exp_top">
+            <div class="top_left"><i class="fa-brands fa-github"></i></div>
+            <div class="top_right"><h3>近期作品 - 工作室網站website</h3></div>
+          </div>
+          <div class="exp_bottom">
+            <div class="bottom_left"></div>
+            <div class="bottom_right">
+              <div class="buttons">
+                <a href="https://github.com/shiang0504/image-studio-website">
+                  <div class="title">GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+                <a href="https://shiang0504.github.io/image-studio-website">
+                  <div class="title">DEMO <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+              </div>
+              <div class="image">
+                <img target=_blank src="./assets/image-studio-website.jpg" alt="工作室網站">
+              </div>
+              <p>使用原生JS、jQuery、SCSS開發，</p>
+              <p>展示作品及提供資訊的靜態網站，</p>
+              <p>RWD響應式設計，動畫使用jQuery完成。</p>
             </div>
           </div>
         </div>
@@ -235,78 +282,37 @@ onMounted(()=>{
             </div>
           </div>
         </div>
-        <div class="exp3" ref="exp3" :class="{active:myExp.exp3}">
+        <div class="exp1" ref="exp1" :class="{active:myExp.exp1}">
           <div class="exp_top">
-            <div class="top_left"><i class="fa-brands fa-github"></i></div>
-            <div class="top_right"><h3>近期作品 - 甜點購物網站APP</h3></div>
+            <div class="top_left"><i class="fa-regular fa-folder-open"></i></div>
+            <div class="top_right"><h3>經歷及專長</h3></div>
           </div>
           <div class="exp_bottom">
             <div class="bottom_left"></div>
             <div class="bottom_right">
-              <div class="buttons">
-                <a href="https://github.com/shiang0504/dessert-shop">
-                  <div class="title">CODE <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-                </a>
-                <a href="https://shiang0504.github.io/dessert-shop">
-                  <div class="title">DEMO <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-                </a>
+              <ul>
+                <span>學經歷</span>
+                <li>● 藥師公會全聯會/資訊專員
+                  <p class="indent">2011/1-2022/4</p>
+                  <p class="indent">主要工作內容：</p>
+                  <p class="indent">官方網站維護管理</p>
+                  <p class="indent">資訊機房管理</p>
+                  <p class="indent">辦公室電腦軟硬體維護管理</p>
+                  <p class="indent">資訊軟硬體評估、規劃、採購</p>
+                </li>
+                <li>● 景文科技大學/電子工程系畢</li>
+                <span>專長</span>
+                <li>● 前端網頁開發</li>
+                <li>● 美食、商品攝影</li>
+                <li>● 影片拍攝及剪輯</li>
+              </ul>
+              <div class="img">
+                <img src="./assets/certificate.jpg" alt="">
               </div>
-              <div class="image">
-                <img target=_blank src="./assets/dessert-shop.jpg" alt="甜點店">
-              </div>
-              <p>資料驅動畫面的SPA應用，以及UX、RWD響應式設計及切版練習，</p>
-              <p>搭配hashchange事件做簡單的頁面路由，實現每項商品具有獨立網址的效果。</p>
             </div>
           </div>
         </div>
-        <div class="exp4" ref="exp4" :class="{active:myExp.exp4}">
-          <div class="exp_top">
-            <div class="top_left"><i class="fa-brands fa-github"></i></div>
-            <div class="top_right"><h3>近期作品 - 行事曆APP</h3></div>
-          </div>
-          <div class="exp_bottom">
-            <div class="bottom_left"></div>
-            <div class="bottom_right">
-              <div class="buttons">
-                <a href="https://github.com/shiang0504/calender-project">
-                  <div class="title">CODE <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-                </a>
-                <a href="https://shiang0504.github.io/calender-project">
-                  <div class="title">DEMO <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-                </a>
-              </div>
-              <div class="image">
-                <img target=_blank src="./assets/calender-project.jpg" alt="萬年曆">
-              </div>
-              <p>簡易版本的google日曆，並結合天氣預報，</p>
-              <p>RWD響應式設計，支援觸控手勢操作(滑動切換行事曆年、月份)。</p>
-            </div>
-          </div>
-        </div>
-        <div class="exp5" ref="exp5" :class="{active:myExp.exp5}">
-          <div class="exp_top">
-            <div class="top_left"><i class="fa-brands fa-github"></i></div>
-            <div class="top_right"><h3>近期作品 - 工作室網站website</h3></div>
-          </div>
-          <div class="exp_bottom">
-            <div class="bottom_left"></div>
-            <div class="bottom_right">
-              <div class="buttons">
-                <a href="https://github.com/shiang0504/image-studio-website">
-                  <div class="title">CODE <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-                </a>
-                <a href="https://shiang0504.github.io/image-studio-website">
-                  <div class="title">DEMO <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-                </a>
-              </div>
-              <div class="image">
-                <img target=_blank src="./assets/image-studio-website.jpg" alt="工作室網站">
-              </div>
-              <p>展示作品及提供資訊的靜態網站，</p>
-              <p>RWD響應式設計，動畫使用jQuery完成。</p>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
@@ -544,6 +550,9 @@ onMounted(()=>{
           @include tablet-768{
             font-size: 20px;
           }
+          .red{
+            color: rgb(252, 88, 88);
+          }
         }
       }
       .local{
@@ -705,6 +714,9 @@ onMounted(()=>{
                   margin-top: 5px;
                   font-size: 18px;
                   color: gray;
+                  &.indent{
+                  text-indent: 1.5em;
+                }
                 }
               }
             }
