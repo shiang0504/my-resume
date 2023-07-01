@@ -1,7 +1,10 @@
 <script setup>
 import { ref, reactive, watchEffect, watch, computed, onMounted, onBeforeMount, onBeforeUpdate } from 'vue'
-import { text, changeText } from './JS/changeText.js'
+// import { text, changeText } from './JS/changeText.js'
+import { typewriterDOM1, typewriterDOM2, typewriterDOM3, typewriterText1, typewriterText2, typewriterText3} from './JS/typewriter.js'
 
+const noScroll = ref(true)
+const loading = ref(null)
 const chatboxToggle1 = ref(null)
 const chatboxToggle2 = ref(null)
 const chatboxToggle3 = ref(null)
@@ -30,7 +33,7 @@ const myExp = reactive({
   exp4: false,
   exp5: false,
 })
-const section4Toggle = reactive({
+const section3Toggle = reactive({
   hero: false,
 })
 const chatboxWrap = ref()
@@ -46,10 +49,20 @@ const exp5 = ref()
 const section2 = ref()
 const section2_items = ref()
 const section2_items_imgs = ref([])
-const section4_items = ref()
-const section4_hero = ref()
+const section3_items = ref()
+const section3_hero = ref()
+const contentText = ref(true)
 
 onMounted(()=>{
+  // 取消loading狀態
+  setTimeout(()=>{
+    loading.value.style.opacity = '0';
+    noScroll.value = false
+  }, 1000)
+  // 最後面的文字循環
+  setInterval(()=>{
+    contentText.value = !contentText.value
+  }, 5000);
   const scrollHandler=()=>{
     // console.log('整個網站的高度',document.documentElement.scrollHeight)
     // console.log('body垂直捲軸被捲動的距離',document.documentElement.scrollTop)
@@ -87,7 +100,12 @@ onMounted(()=>{
     //****myExp
     if(exp0.value.getBoundingClientRect().top < window.innerHeight*2/3){
       myExp.exp0= true
-      changeText('您好，我是祺翔，對於前端網頁設計開發有高度興趣，具一年以上前端網頁自學與開發經驗，讓我養成獨立解決問題的能力；結合攝影及多媒體影像處理專長，目前已從零到有獨立完成數個RWD Website/APP（敬請參考下方作品集與本網站），在前一份工作中也有維護管理網站經驗，並具備後端PHP與資料庫基礎知識，個性圓融合群，有信心能在團隊中快速進入狀況為公司貢獻所長。', 100, 30, 120)
+      // changeText('您好，我是祺翔，對於前端網頁設計開發有高度興趣，具一年以上前端網頁自學與開發經驗，讓我養成獨立解決問題的能力；結合攝影及多媒體影像處理專長，目前已從零到有獨立完成數個RWD Website/APP（敬請參考下方作品集與本網站），在前一份工作中也有維護管理網站經驗，並具備後端PHP與資料庫基礎知識，個性圓融合群，有信心能在團隊中快速進入狀況為公司貢獻所長。', 100, 30, 120)
+    }
+    if(typewriterDOM1.value.getBoundingClientRect().top < window.innerHeight*2/3){
+      typewriterText1('您好，我是祺翔，對於前端網頁設計開發有高度興趣，具一年以上前端網頁自學與開發經驗，讓我養成獨立思考及解決問題的能力，',typewriterDOM1)
+      typewriterText2('喜歡攝影，也對影像品質有要求，結合影像處理專長已從零到有獨立完成數個RWD Website/APP，敬請參考下方作品集與本網站，',typewriterDOM2)
+      typewriterText3('在前一份工作中有維護管理網站經驗，並已具備後端PHP與MySQL資料庫CRUD基礎，也開始摸索Node.js，個性圓融合群，有信心能在團隊中快速進入狀況並為公司貢獻所長！',typewriterDOM3)
     }
     if(exp1.value.getBoundingClientRect().top < window.innerHeight*2/3){
       myExp.exp1= true
@@ -117,10 +135,10 @@ onMounted(()=>{
       rotate = rotate <= -20 ? -20 : rotate
       el.style.transform = `rotateY(${rotate}deg)`
     });
-    //****section4
-    section4_hero.value.style.width= Math.abs(section4_items.value.offsetTop*0.1-100)+0.5+'vmax' //0 =>100
-    section4_hero.value.style.height= Math.abs(section4_items.value.offsetTop*0.1-100)+0.5+'vmax' //1000 => 0
-    section4_items.value.offsetTop>=100 ? section4Toggle.hero=true : section4Toggle.hero=false
+    //****section3
+    section3_hero.value.style.width= Math.abs(section3_items.value.offsetTop*0.1-100)+0.5+'vmax' //0 =>100
+    section3_hero.value.style.height= Math.abs(section3_items.value.offsetTop*0.1-100)+0.5+'vmax' //1000 => 0
+    section3_items.value.offsetTop>=100 ? section3Toggle.hero=true : section3Toggle.hero=false
     //滾動到最底部時
     if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight-5){
       scrollDownToggle.hide = true
@@ -134,6 +152,17 @@ onMounted(()=>{
 </script>
 
 <template>
+  <div class="loadingfixed" ref="loading" @transitionend="loading.style.display='none'">
+    <div class="loading">
+      <div class="rectangle"></div>
+      <div class="rectangle"></div>
+      <div class="rectangle"></div>
+    </div>
+  </div>
+  <div class="scroll_down" :class="{hide:scrollDownToggle.hide,small:scrollDownToggle.small}" @click="section2Toggle.item2=!section2Toggle.item2">SCROLL DOWN</div>
+  <!-- <div class="heroText">{{ text }}</div> -->
+
+<div :class="{noScroll: noScroll}">
   <div class="section0">
     <div class="chatboxWrap" ref="chatboxWrap" :class="{active:chatboxToggle.item0}">
       <div class="tool">
@@ -145,25 +174,23 @@ onMounted(()=>{
       </div>
       <div class="chatbox">
         <div class="user remote" :class="{active:chatboxToggle.item1}">
-            <div class="txt">Hello!👋</div>    
+            <span class="txt">Hello!👋</span>    
         </div>
         <div class="user local" :class="{active:chatboxToggle.item2}">
-            <div class="txt">Hi!</div>    
+            <span class="txt">Hi!</span>    
         </div>
         <div class="user remote" :class="{active:chatboxToggle.item3}">
-            <div class="txt">聽說你們在徵<span class="red">前端工程師</span>?</div>    
+            <span class="txt">聽說你們在徵<span class="red">前端工程師</span>?</span>    
         </div>
         <div class="user local" :class="{active:chatboxToggle.item4}">
-            <div class="txt">對，沒錯!</div>    
+            <span class="txt">對，沒錯!</span>    
         </div>
         <div class="user remote" :class="{active:chatboxToggle.item5}">
-            <div class="txt">請給我幾分鐘的時間介紹自己✌</div>    
+            <span class="txt">請給我幾分鐘的時間介紹自己✌</span>    
         </div>
       </div>
     </div>
   </div>
-  <div class="scroll_down" :class="{hide:scrollDownToggle.hide,small:scrollDownToggle.small}" @click="section2Toggle.item2=!section2Toggle.item2">SCROLL DOWN</div>
-  <!-- <div class="heroText">{{ text }}</div> -->
   <div class="section1">
     <div class="section1_items" ref="section1_items">
       <div class="hero" ref="section1_hero" :class="{active:section1Toggle.hero}">
@@ -185,8 +212,17 @@ onMounted(()=>{
                 <img src="./assets/photo.jpg" alt="">
               </div>
               <ul>
-                <li class="indent">{{ text }}</li><br>
+                <li class="indent" ref="typewriterDOM1"></li>
               </ul>
+              <ul>
+                <li class="indent" ref="typewriterDOM2"></li>
+              </ul>
+              <ul>
+                <li class="indent" ref="typewriterDOM3"></li>
+              </ul>
+              <!-- <ul>
+                <li class="indent">{{ text }}</li><br>
+              </ul> -->
             </div>
           </div>
         </div>
@@ -203,15 +239,20 @@ onMounted(()=>{
                   <div class="title">GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
                 </a>
                 <a href="https://shiang0504.github.io/dessert-shop">
-                  <div class="title">DEMO <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                  <div class="title fa-beat-fade">DEMO <i class="fa-solid fa-arrow-up-right-from-square fa-beat-fade"></i></div>
                 </a>
               </div>
               <div class="image">
                 <img target=_blank src="./assets/dessert-shop.jpg" alt="甜點店">
               </div>
-              <p>使用Vue3 Composition API、Vite、SCSS開發，</p>
-              <p>資料驅動畫面的SPA應用，以及UX、RWD響應式設計及切版練習，</p>
-              <p>搭配hashchange事件做簡單的頁面路由，實現每項商品具有獨立網址的效果。</p>
+              <ul class="skill">
+                <li><i class="fa-regular fa-circle-check"></i>VUE3</li>
+                <li><i class="fa-regular fa-circle-check"></i>RWD</li>
+                <li><i class="fa-regular fa-circle-check"></i>SCSS</li>
+              </ul>
+              <p>甜點主題的購物網站，資料驅動畫面內容渲染的SPA，</p>
+              <p>搭配hashchange事件做頁面路由，實現每項商品都有獨立網址的效果，</p>
+              <p>使用Vue3 Composition API、Vite管理開發。</p>
             </div>
           </div>
         </div>
@@ -228,15 +269,21 @@ onMounted(()=>{
                   <div class="title">GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
                 </a>
                 <a href="https://shiang0504.github.io/calender-project">
-                  <div class="title">DEMO <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                  <div class="title fa-beat-fade">DEMO <i class="fa-solid fa-arrow-up-right-from-square fa-beat-fade"></i></div>
                 </a>
               </div>
               <div class="image">
                 <img target=_blank src="./assets/calender-project.jpg" alt="萬年曆">
               </div>
-              <p>使用Vue3 Composition API、Vite、SCSS開發，</p>
+              <ul class="skill">
+                <li><i class="fa-regular fa-circle-check"></i>VUE3</li>
+                <li><i class="fa-regular fa-circle-check"></i>串接API</li>
+                <li><i class="fa-regular fa-circle-check"></i>RWD</li>
+                <li><i class="fa-regular fa-circle-check"></i>SCSS</li>
+              </ul>
               <p>簡易版本的google日曆，並串接OpenWeather API天氣預報，</p>
-              <p>RWD響應式設計，支援觸控手勢操作(滑動切換行事曆年、月份)。</p>
+              <p>支援觸控手勢操作(滑動切換行事曆年、月份)，</p>
+              <p>使用Vue3 Composition API、Vite管理開發。</p>
             </div>
           </div>
         </div>
@@ -253,15 +300,20 @@ onMounted(()=>{
                   <div class="title">GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
                 </a>
                 <a href="https://shiang0504.github.io/image-studio-website">
-                  <div class="title">DEMO <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                  <div class="title fa-beat-fade">DEMO <i class="fa-solid fa-arrow-up-right-from-square fa-beat-fade"></i></div>
                 </a>
               </div>
               <div class="image">
                 <img target=_blank src="./assets/image-studio-website.jpg" alt="工作室網站">
               </div>
-              <p>使用原生JS、jQuery、SCSS開發，</p>
-              <p>展示作品及提供資訊的靜態網站，</p>
-              <p>RWD響應式設計，動畫使用jQuery完成。</p>
+              <ul class="skill">
+                <li><i class="fa-regular fa-circle-check"></i>原生JS</li>
+                <li><i class="fa-regular fa-circle-check"></i>jQuery</li>
+                <li><i class="fa-regular fa-circle-check"></i>RWD</li>
+                <li><i class="fa-regular fa-circle-check"></i>SCSS</li>
+              </ul>
+              <p>第一個網站，使用Javascript、jQuery、SCSS開發，</p>
+              <p>展示作品及提供資訊的靜態網站，動畫使用jQuery完成。</p>
             </div>
           </div>
         </div>
@@ -292,6 +344,7 @@ onMounted(()=>{
             <div class="bottom_right">
               <ul>
                 <span>學經歷</span>
+                <li>● 景文科技大學/電子工程系畢</li>
                 <li>● 藥師公會全聯會/資訊專員
                   <p class="indent">2011/1-2022/4</p>
                   <p class="indent">主要工作內容：</p>
@@ -300,7 +353,6 @@ onMounted(()=>{
                   <p class="indent">辦公室電腦軟硬體維護管理</p>
                   <p class="indent">資訊軟硬體評估、規劃、採購</p>
                 </li>
-                <li>● 景文科技大學/電子工程系畢</li>
                 <span>專長</span>
                 <li>● 前端網頁開發</li>
                 <li>● 美食、商品攝影</li>
@@ -368,17 +420,24 @@ onMounted(()=>{
       </div>
     </div>
   </div>
-  <div class="section4">
-    <div class="section4_items" ref="section4_items">
-      <div class="bg" :class="{cancel:section4Toggle.hero}"></div>
-      
+  <div class="section3">
+    <div class="section3_items" ref="section3_items">
+      <div class="bg" :class="{cancel:section3Toggle.hero}"></div>
       <div class="text">
-        <p :class="{show:scrollDownToggle.hide}"><i class="fa-regular fa-envelope"></i>聯絡信箱</p>
-        <p :class="{show:scrollDownToggle.hide}"><span>shiang0504@gmail.com</span></p>
+        <p :class="{show:scrollDownToggle.hide}"><i class="fa-regular fa-envelope"></i>
+          <Transition name="slideUp" mode="out-in">
+          <span v-if="contentText">謝謝觀看</span>
+          <span v-else>聯絡信箱</span>
+          </Transition>
+        </p>
+        <!-- <p v-if="contentText" :class="{show:scrollDownToggle.hide}"><i class="fa-regular fa-envelope"></i>謝謝觀看</p> -->
+        <!-- <p v-else :class="{show:scrollDownToggle.hide}"><i class="fa-regular fa-envelope"></i>聯絡信箱</p> -->
+        <p :class="{show:scrollDownToggle.hide}"><a href="mailto:shiang0504@gmail.com">shiang0504@gmail.com</a></p>
       </div>
-      <div class="hero" ref="section4_hero" :class="{active:section4Toggle.hero}"></div>
+      <div class="hero" ref="section3_hero" :class="{active:section3Toggle.hero}"></div>
     </div>
   </div>
+</div>
 </template>
 
 <style lang="scss" scoped>
@@ -392,6 +451,52 @@ onMounted(()=>{
         @content;
     }
 }
+.noScroll{
+  overflow: hidden;
+  height: 100vh;
+}
+.loadingfixed{
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  position: fixed;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .5s;
+  opacity: 1;
+  .loading {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    .rectangle {
+      display: inline-block;
+      position: absolute;
+      left: 8px;
+      width: 16px;
+      background: #6f6f6f;
+      animation: loadingAnimation .5s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+      &:nth-child(1) {
+        left: 8px;
+        animation-delay: -0.24s;
+      }
+      &:nth-child(2) {
+        left: 32px;
+        animation-delay: -0.12s;
+      }
+      &:nth-child(3) {
+        left: 56px;
+        animation-delay: 0;
+      }
+    }
+    @keyframes loadingAnimation {
+      0% { top: 8px;  height: 64px; }
+      50%, 100% { top: 24px; height: 32px; }
+    }
+  }
+}
 .scroll_down{
   width: 200px;
   position: fixed;
@@ -403,7 +508,7 @@ onMounted(()=>{
   color: rgb(121, 121, 121);
   font-size: 22px;
   animation: scroll_down_breath 5s infinite ease-in-out;
-  z-index: 999;
+  z-index: 100;
   transition: 1s;
   transform: scale(1.8);
   &.small{
@@ -480,29 +585,33 @@ onMounted(()=>{
     position: sticky;
     top: 100px;
     width: 70%;
-    height: 80vh;
-    background-color: rgb(255, 255, 255);
-    margin-bottom: 20px;
-    border: 0.1px solid rgb(225, 225, 225);
+    height: 70vh;;
     border-radius: 10px;
-    box-shadow: 5px 5px 10px 5px rgb(235, 235, 235);
+    box-shadow: 5px 5px 10px 5px rgb(99, 99, 99);
     opacity: 0;
     transition: 1s;
+    display: flex;
+    flex-direction: column;
     @include tablet-768{
       width: 90%;
+      height: 60vh;
     }
     &.active{
       opacity: 1;
     }
     .tool{
-      border-bottom: 0.1px solid rgb(192, 192, 192);
-      padding: 6px;
+      background-color: rgb(53, 57, 65);
+      border-radius: 10px 10px 0 0;
+      flex: 0 0 60px;
+      display: flex;
+      align-items: center;
       ul{
         display: flex;
+        margin-left: 16px;
         li{
-          width: 10px;
-          height: 10px;
-          margin-right: 4px;
+          width: 16px;
+          height: 16px;
+          margin-right: 8px;
           border-radius: 50%;
           &:nth-child(1){
             background-color: rgb(255, 96, 88);
@@ -520,38 +629,39 @@ onMounted(()=>{
       }
     }
     .chatbox{
-      height: 100%;
-      padding: 50px 20px 20px 20px;
+      flex: 1 1;
+      padding: 50px;
+      background-color: rgb(40, 44, 52);
+      border-radius: 0 0 10px 10px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       transition: .5s;
       @include tablet-768{
-        padding: 20px 20px 20px 20px;
+        padding: 20px;
       }
       .user{
+        flex:0 0;
         display: flex;
         align-items: flex-start;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
         opacity: 0;
         &.active{
           opacity: 1;
         }
         .txt{
+          display: inline;
           background-color: rgb(159, 133, 160);
           padding: 10px 20px;
           border-radius: 20px;
           flex-grow: 0;
           position: relative;
-          display: flex;
-          justify-content: center;
-          align-items: center;
           font-size: 50px;
           @include tablet-768{
             font-size: 20px;
           }
           .red{
-            color: rgb(252, 88, 88);
+            color: rgb(255, 29, 29);
           }
         }
       }
@@ -564,7 +674,8 @@ onMounted(()=>{
             content: '';
             position: absolute;
             right: -16px;
-            top: 10px;
+            top: 40%;
+            transform: translateY(-50%);
             border-top: 10px solid transparent;
             border-bottom: 10px solid transparent;
             border-left: 10px solid rgb(22, 207, 31) ;
@@ -578,8 +689,9 @@ onMounted(()=>{
         &::before{
           content: '';
           position: absolute;
-          top: 10px;
           left: -16px;
+          top: 40%;
+          transform: translateY(-50%);
           border-top: 10px solid transparent;
           border-bottom: 10px solid transparent;
           border-right: 10px solid rgb(177, 177, 177) ;
@@ -707,16 +819,13 @@ onMounted(()=>{
                 display: inline-block;
               }
               li{
-                &.indent{
-                  text-indent: 2em;
-                }
                 p{
                   margin-top: 5px;
                   font-size: 18px;
                   color: gray;
                   &.indent{
-                  text-indent: 1.5em;
-                }
+                    text-indent: 1.5em;
+                  }
                 }
               }
             }
@@ -748,7 +857,15 @@ onMounted(()=>{
       .exp0{
         .bottom_right{
           flex-direction: column;
-          align-items: center;
+          ul{
+            display: block;
+            width: 100%;
+            margin-bottom: 5px !important;
+            li.indent{
+              text-indent: 2em;
+            }
+          }
+          
           .img{
             width: 20vmin;
             height: 30vmin;
@@ -1007,14 +1124,6 @@ onMounted(()=>{
                 }
               }
             }
-            p{
-              text-align: center;
-              font-size: 20px;
-              margin-top: 5px;
-              @include tablet-768{
-                text-align: left;
-              }
-            }
             .image{
               width: 50%;
               margin: 30px auto;
@@ -1037,6 +1146,32 @@ onMounted(()=>{
               }
               @include tablet-768{
                 width: 100%;
+              }
+            }
+            .skill{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-wrap: wrap;
+              li{
+                font-size: 20px;
+                line-height: 30px;
+                height: 30px;
+                background-color: #055034;;
+                margin: 5px;
+                padding: 5px;
+                border-radius: 30px;
+                i{
+                  margin-right: 2px;
+                }
+              }
+            }
+            p{
+              text-align: center;
+              font-size: 20px;
+              margin-top: 5px;
+              @include tablet-768{
+                text-align: left;
               }
             }
           }
@@ -1068,7 +1203,7 @@ onMounted(()=>{
   .section2_items{
     height: 100vh;
     background-color: #000000;
-    padding-right: 80vw; 
+    padding-right: 80vmax; 
     display: flex;
     align-items: center;
     @include tablet-768{
@@ -1132,7 +1267,7 @@ onMounted(()=>{
         font-size: 16px;
         width: 50%;
         height: 30%;
-        z-index: 2;
+        z-index: 3;
         display: flex;
         align-items: center;
         margin: auto;
@@ -1169,10 +1304,10 @@ onMounted(()=>{
     }
   }
 }
-.section4{
+.section3{
   height: calc(100vh + 1000px);
   position: relative;
-  .section4_items{
+  .section3_items{
     height: 100vh;
     width: 100%;
     position: sticky;
@@ -1197,6 +1332,7 @@ onMounted(()=>{
       display: flex;
       justify-content: center;
       align-items: center;
+      pointer-events: none;
       @include tablet-768{
         flex-direction: column; 
       }
@@ -1207,6 +1343,7 @@ onMounted(()=>{
         opacity: 0;
         transition: all 1s;
         width: 50vmax;
+        overflow: hidden;
         &:nth-child(1){
           transform: translateX(-50px);
           padding-right: 1vmax;
@@ -1222,11 +1359,13 @@ onMounted(()=>{
           transform: translateX(50px);
           padding-left: 1vmax;
           text-align: left;
-          span{
+          a{
             color: white;
             background: black;
+            text-decoration: none;
+            pointer-events: auto;
+            cursor: pointer;
           }
-          color: gray;
           @include tablet-768{
             text-align: center;
             transform: translateY(50px);
@@ -1237,6 +1376,9 @@ onMounted(()=>{
         &.show{
           opacity: 1;
           transform: translateX(0px);
+        }
+        i {
+          margin-right: 5px;
         }
       }
     }
@@ -1251,5 +1393,18 @@ onMounted(()=>{
   &.active{
     border-radius: 50%;
   }
+}
+.slideUp-enter-active, .slideUp-leave-active {
+  transition: all .3s linear;
+  position: relative;
+  top: 0;
+}
+.slideUp-enter-from {
+  opacity: 0;
+  top: 50px;
+}
+.slideUp-leave-to {
+  opacity: 0;
+  top: -50px;
 }
 </style>

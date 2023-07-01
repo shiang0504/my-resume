@@ -15,7 +15,7 @@ const deleteText =(deleteInterval)=>{ //每0.1秒刪除text中最後一個文字
             text.value= Array.from(text.value) //轉陣列
             text.value.splice(-1,1) //刪最後一個
             text.value = text.value.join('') //轉回字串
-        },deleteInterval)
+        }, deleteInterval)
     })
 }
 const pushText=(data, pushIntervalMin, pushIntervalMax)=>{ //每0.3秒加入data中的一個文字，直到字串長度被for跑完
@@ -29,7 +29,7 @@ const pushText=(data, pushIntervalMin, pushIntervalMax)=>{ //每0.3秒加入data
                 // text.value.push(data[i]) //把data依序推入字串
                 // text.value = text.value.join('') //轉回字串
                 text.value += data[i]
-            },total)
+            }, total)
         pushIDs.push(pushID) //把每個setTimeout計時都記錄起來，方便刪除
         }
         resolve()

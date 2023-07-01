@@ -15,8 +15,23 @@
     <script type="module" src="/src/main.js"></script>
   </body>
   <style>
-    ::-webkit-scrollbar{
+    /* ::-webkit-scrollbar{
       display: none;
+    } */
+    ::-webkit-scrollbar {
+      width: 10px;
+      background-color: transparent;
+    }
+    ::-webkit-scrollbar-thumb{
+      border-radius: 20px;
+      background-color: rgb(75, 75, 75);
+    }
+    ::-webkit-scrollbar-track{
+      background-color: transparent;
+    }
+    html{
+      scrollbar-color: rgb(75, 75, 75) #ccc;
+      scrollbar-width: thin;
     }
   </style>
 </html>
