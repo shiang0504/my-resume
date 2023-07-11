@@ -4,7 +4,7 @@ import { ref, reactive, watchEffect, watch, computed, onMounted, onBeforeMount, 
 import { typewriterDOM1, typewriterDOM2, typewriterDOM3, typewriterText1, typewriterText2, typewriterText3} from './JS/typewriter.js'
 
 const noScroll = ref(true)
-const loading = ref(null)
+const loadingfixed = ref(null)
 const chatboxToggle1 = ref(null)
 const chatboxToggle2 = ref(null)
 const chatboxToggle3 = ref(null)
@@ -56,7 +56,8 @@ const contentText = ref(true)
 onMounted(()=>{
   // 取消loading狀態
   setTimeout(()=>{
-    loading.value.style.opacity = '0';
+    loadingfixed.value.style.transform = 'translateY(-100%)';
+    loadingfixed.value.style.opacity = '0.5';
     noScroll.value = false
   }, 1000)
   // 最後面的文字循環
@@ -103,9 +104,9 @@ onMounted(()=>{
       // changeText('您好，我是祺翔，對於前端網頁設計開發有高度興趣，具一年以上前端網頁自學與開發經驗，讓我養成獨立解決問題的能力；結合攝影及多媒體影像處理專長，目前已從零到有獨立完成數個RWD Website/APP（敬請參考下方作品集與本網站），在前一份工作中也有維護管理網站經驗，並具備後端PHP與資料庫基礎知識，個性圓融合群，有信心能在團隊中快速進入狀況為公司貢獻所長。', 100, 30, 120)
     }
     if(typewriterDOM1.value.getBoundingClientRect().top < window.innerHeight*2/3){
-      typewriterText1('您好，我是祺翔，對於前端網頁設計開發有高度興趣，具一年以上前端網頁自學與開發經驗，讓我養成獨立思考及解決問題的能力，',typewriterDOM1)
-      typewriterText2('喜歡攝影，也對影像品質有要求，結合影像處理專長已從零到有獨立完成數個RWD Website/APP，敬請參考下方作品集與本網站，',typewriterDOM2)
-      typewriterText3('在前一份工作中有維護管理網站經驗，並已具備後端PHP與MySQL資料庫CRUD基礎，也開始摸索Node.js，個性圓融合群，有信心能在團隊中快速進入狀況並為公司貢獻所長！',typewriterDOM3)
+      typewriterText1('您好，我是祺翔，對於網頁設計開發有高度興趣，具一年以上前端網頁自學與開發經驗，讓我養成獨立思考、拆解問題再解決問題的能力，',typewriterDOM1)
+      typewriterText2('擅長攝影，也對影像品質有要求，結合影像處理專長已從零到有獨立完成數個RWD Website/APP，敬請參考下方作品集與本網站，',typewriterDOM2)
+      typewriterText3('另已具備後端PHP與MySQL、MongoDB的CRUD基礎，也開始摸索Node.js，了解路由和RestfulAPI設計概念，個性謹慎細心、圓融合群，在前一份工作中有維護管理網站經驗，也常要與工程師和使用者溝通，有信心能在新團隊中快速進入狀況並貢獻所長！',typewriterDOM3)
     }
     if(exp1.value.getBoundingClientRect().top < window.innerHeight*2/3){
       myExp.exp1= true
@@ -152,7 +153,8 @@ onMounted(()=>{
 </script>
 
 <template>
-  <div class="loadingfixed" ref="loading" @transitionend="loading.style.display='none'">
+  <div class="loadingfixed" ref="loadingfixed" @transitionend="loadingfixed.style.display='none'">
+    <div class="message">loading...</div>
     <div class="loading">
       <div class="rectangle"></div>
       <div class="rectangle"></div>
@@ -236,10 +238,10 @@ onMounted(()=>{
             <div class="bottom_right">
               <div class="buttons">
                 <a href="https://github.com/shiang0504/dessert-shop">
-                  <div class="title">GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                  <div class="title">Source Code <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
                 </a>
                 <a href="https://shiang0504.github.io/dessert-shop">
-                  <div class="title fa-beat-fade">DEMO <i class="fa-solid fa-arrow-up-right-from-square fa-beat-fade"></i></div>
+                  <div class="title fa-beat-fade">Live Demo <i class="fa-solid fa-arrow-up-right-from-square fa-beat-fade"></i></div>
                 </a>
               </div>
               <div class="image">
@@ -247,10 +249,13 @@ onMounted(()=>{
               </div>
               <ul class="skill">
                 <li><i class="fa-regular fa-circle-check"></i>VUE3</li>
+                <li><i class="fa-regular fa-circle-check"></i>SPA</li>
+                <li><i class="fa-regular fa-circle-check"></i>Router</li>
                 <li><i class="fa-regular fa-circle-check"></i>RWD</li>
                 <li><i class="fa-regular fa-circle-check"></i>SCSS</li>
               </ul>
-              <p>甜點主題的購物網站，資料驅動畫面內容渲染的SPA，</p>
+              <p>甜點主題的購物網站，資料驅動畫面渲染的動態網站，</p>
+              <p>用兩筆json模擬跟後端request資料，</p>
               <p>搭配hashchange事件做頁面路由，實現每項商品都有獨立網址的效果，</p>
               <p>使用Vue3 Composition API、Vite管理開發。</p>
             </div>
@@ -266,10 +271,10 @@ onMounted(()=>{
             <div class="bottom_right">
               <div class="buttons">
                 <a href="https://github.com/shiang0504/calender-project">
-                  <div class="title">GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                  <div class="title">Source Code <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
                 </a>
                 <a href="https://shiang0504.github.io/calender-project">
-                  <div class="title fa-beat-fade">DEMO <i class="fa-solid fa-arrow-up-right-from-square fa-beat-fade"></i></div>
+                  <div class="title fa-beat-fade">Live Demo <i class="fa-solid fa-arrow-up-right-from-square fa-beat-fade"></i></div>
                 </a>
               </div>
               <div class="image">
@@ -278,6 +283,7 @@ onMounted(()=>{
               <ul class="skill">
                 <li><i class="fa-regular fa-circle-check"></i>VUE3</li>
                 <li><i class="fa-regular fa-circle-check"></i>串接API</li>
+                <li><i class="fa-regular fa-circle-check"></i>非同步處理</li>
                 <li><i class="fa-regular fa-circle-check"></i>RWD</li>
                 <li><i class="fa-regular fa-circle-check"></i>SCSS</li>
               </ul>
@@ -297,17 +303,16 @@ onMounted(()=>{
             <div class="bottom_right">
               <div class="buttons">
                 <a href="https://github.com/shiang0504/image-studio-website">
-                  <div class="title">GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                  <div class="title">Source Code <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
                 </a>
                 <a href="https://shiang0504.github.io/image-studio-website">
-                  <div class="title fa-beat-fade">DEMO <i class="fa-solid fa-arrow-up-right-from-square fa-beat-fade"></i></div>
+                  <div class="title fa-beat-fade">Live Demo <i class="fa-solid fa-arrow-up-right-from-square fa-beat-fade"></i></div>
                 </a>
               </div>
               <div class="image">
                 <img target=_blank src="./assets/image-studio-website.jpg" alt="工作室網站">
               </div>
               <ul class="skill">
-                <li><i class="fa-regular fa-circle-check"></i>原生JS</li>
                 <li><i class="fa-regular fa-circle-check"></i>jQuery</li>
                 <li><i class="fa-regular fa-circle-check"></i>RWD</li>
                 <li><i class="fa-regular fa-circle-check"></i>SCSS</li>
@@ -325,11 +330,15 @@ onMounted(()=>{
           <div class="exp_bottom">
             <div class="bottom_content">
               <ul>
-                <li>● HTML / SCSS</li>
-                <li>● JavaScript ES6+</li>
-                <li>● jQuery</li>
-                <li>● Vue3</li>
-                <li>● PHP</li>
+                <li><img src="./assets/logo/html5.png" alt="">● HTML5</li>
+                <li><img src="./assets/logo/sass.png" alt="">● SCSS</li>
+                <li><img src="./assets/logo/Javascript.png" alt="">● JavaScript ES6+</li>
+                <li><img src="./assets/logo/vue.png" alt="">● Vue3</li>
+                <li><img src="./assets/logo/jQuery.png" alt="">● jQuery</li>
+                <li><img src="./assets/logo/PHP.png" alt="">● PHP</li>
+                <li><img src="./assets/logo/mysql.png" alt="">● MySQL</li>
+                <li><img src="./assets/logo/nodeJS.png" alt="">● Node.js</li>
+                <li><img src="./assets/logo/Mongodb.png" alt="">● MongoDB</li>
               </ul>
             </div>
           </div>
@@ -458,40 +467,46 @@ onMounted(()=>{
 .loadingfixed{
   width: 100%;
   height: 100%;
-  background-color: white;
+  background-color: #6f6f6f;
   position: fixed;
   z-index: 999;
   display: flex;
+  flex-direction: column-reverse;
   justify-content: center;
   align-items: center;
-  transition: all .5s;
+  transition: all 1s;
+  transform: translateY(0%);
   opacity: 1;
-  .loading {
+  .message{
+    font-size: 22px;
+    color: #ffffff;
+  }
+  .loading{
     display: inline-block;
     position: relative;
     width: 80px;
     height: 80px;
-    .rectangle {
+    .rectangle{
       display: inline-block;
       position: absolute;
       left: 8px;
       width: 16px;
-      background: #6f6f6f;
+      background: #ffffff;
       animation: loadingAnimation .5s cubic-bezier(0, 0.5, 0.5, 1) infinite;
-      &:nth-child(1) {
+      &:nth-child(1){
         left: 8px;
         animation-delay: -0.24s;
       }
-      &:nth-child(2) {
+      &:nth-child(2){
         left: 32px;
         animation-delay: -0.12s;
       }
-      &:nth-child(3) {
+      &:nth-child(3){
         left: 56px;
         animation-delay: 0;
       }
     }
-    @keyframes loadingAnimation {
+    @keyframes loadingAnimation{
       0% { top: 8px;  height: 64px; }
       50%, 100% { top: 24px; height: 32px; }
     }
@@ -805,7 +820,8 @@ onMounted(()=>{
                 width: 100%;
                 height: 100%;
                 border-radius: 20px;
-                object-fit: cover;
+                // object-fit: contain;
+                // object-fit: cover;
               }
               @include tablet-768{
                 margin: 10px;
@@ -865,11 +881,9 @@ onMounted(()=>{
               text-indent: 2em;
             }
           }
-          
           .img{
             width: 20vmin;
             height: 30vmin;
-            border-radius: 50%;
               img{
                 object-position: center 20%;
                 width: 100%;
@@ -951,34 +965,58 @@ onMounted(()=>{
                 white-space: nowrap;
                 height: 30px;
                 display: flex;
-                justify-content: end;
+                justify-content: space-between;
                 align-items: center;
                 border-radius: 0 20px 20px 0;
                 &:nth-child(1){
                   width: 0%;
                   transition: width 3s 3s cubic-bezier(0.070, 0.975, 0.075, 0.845);
-                  background-color: #59c09a;
+                  background-color: #64d6ac;
                 }
                 &:nth-child(2){
+                  width: 0%;
+                  transition: width 3s 3s cubic-bezier(0.070, 0.975, 0.075, 0.845);
+                  background-color: #59c09a;
+                }
+                &:nth-child(3){
                   width: 0%;
                   transition: width 3s 3.1s cubic-bezier(0.070, 0.975, 0.075, 0.845);
                   background-color: #51af8c;
                 }
-                &:nth-child(3){
+                &:nth-child(4){
                   width: 0%;
                   transition: width 3s 3.2s cubic-bezier(0.070, 0.975, 0.075, 0.845);
                   background-color: #459678;
                 }
-                &:nth-child(4){
+                &:nth-child(5){
                   width: 0%;
                   transition: width 3s 3.3s cubic-bezier(0.070, 0.975, 0.075, 0.845);
                   background-color: #3c8268;
                 }
-                &:nth-child(5){
+                &:nth-child(6){
                   width: 0%;
                   transition: width 3s 3.4s cubic-bezier(0.070, 0.975, 0.075, 0.845);
                   background-color: #37765f;
+                }
+                &:nth-child(7){
+                  width: 0%;
+                  transition: width 3s 3.4s cubic-bezier(0.070, 0.975, 0.075, 0.845);
+                  background-color: #2d604d;
+                }
+                &:nth-child(8){
+                  width: 0%;
+                  transition: width 3s 3.4s cubic-bezier(0.070, 0.975, 0.075, 0.845);
+                  background-color: #265040;
+                }
+                &:nth-child(9){
+                  width: 0%;
+                  transition: width 3s 3.4s cubic-bezier(0.070, 0.975, 0.075, 0.845);
+                  background-color: #1f4033;
                   margin-bottom: 40px;
+                }
+                img{
+                  height: 100%;
+
                 }
               }
             }
@@ -1004,16 +1042,28 @@ onMounted(()=>{
                     width: 100%;
                   }
                   &:nth-child(2){
-                    width: 80%;
+                    width: 100%;
                   }
                   &:nth-child(3){
-                    width: 60%;
+                    width: 80%;
                   }
                   &:nth-child(4){
-                    width: 50%;
+                    width: 60%;
                   }
                   &:nth-child(5){
+                    width: 50%;
+                  }
+                  &:nth-child(6){
                     width: 30%;
+                  }
+                  &:nth-child(7){
+                    width: 30%;
+                  }
+                  &:nth-child(8){
+                    width: 15%;
+                  }
+                  &:nth-child(9){
+                    width: 15%;
                   }
                 }
               }
@@ -1153,13 +1203,16 @@ onMounted(()=>{
               justify-content: center;
               align-items: center;
               flex-wrap: wrap;
+              @include tablet-768{
+                justify-content: start;
+              }
               li{
                 font-size: 20px;
                 line-height: 30px;
                 height: 30px;
                 background-color: #055034;;
                 margin: 5px;
-                padding: 5px;
+                padding: 0px 5px;
                 border-radius: 30px;
                 i{
                   margin-right: 2px;
