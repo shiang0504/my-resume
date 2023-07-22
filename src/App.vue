@@ -1,7 +1,6 @@
 <script setup>
-import { ref, reactive, watchEffect, watch, computed, onMounted, onBeforeMount, onBeforeUpdate } from 'vue'
-// import { text, changeText } from './JS/changeText.js'
-import { typewriterDOM1, typewriterDOM2, typewriterDOM3, typewriterText1, typewriterText2, typewriterText3} from './JS/typewriter.js'
+import { ref, reactive, onMounted } from 'vue'
+import { typewriterOrder1, typewriterOrder2, typewriterOrder3 } from './JS/typewriter.js'
 
 const noScroll = ref(true)
 const loadingfixed = ref(null)
@@ -25,6 +24,11 @@ const scrollDownToggle = reactive({
   small: false,
   hide: false,
 })
+
+const typewriterDOM1 = ref(null)
+const typewriterDOM2 = ref(null)
+const typewriterDOM3 = ref(null)
+
 const myExp = reactive({
   exp0: false,
   exp1: false,
@@ -32,10 +36,13 @@ const myExp = reactive({
   exp3: false,
   exp4: false,
   exp5: false,
+  exp6: false,
+  exp7: false,
 })
 const section3Toggle = reactive({
   hero: false,
 })
+
 const chatboxWrap = ref()
 const section1_items = ref()
 const section1_hero = ref()
@@ -46,6 +53,8 @@ const exp2 = ref()
 const exp3 = ref()
 const exp4 = ref()
 const exp5 = ref()
+const exp6 = ref()
+const exp7 = ref()
 const section2 = ref()
 const section2_items = ref()
 const section2_items_imgs = ref([])
@@ -57,7 +66,6 @@ onMounted(()=>{
   // 取消loading狀態
   setTimeout(()=>{
     loadingfixed.value.style.transform = 'translateY(-100%)';
-    loadingfixed.value.style.opacity = '0.5';
     noScroll.value = false
   }, 1000)
   // 最後面的文字循環
@@ -74,87 +82,69 @@ onMounted(()=>{
     // console.log('元素的寬度clientWidth',section2_items.value.clientWidth)
     // console.log('元素的寬度scrollWidth',section2_items.value.scrollWidth)
     // console.log('元素的寬度getBoundingClientRect().width',section2_items.value.getBoundingClientRect().width)
-    //滾動到最頂部時
-    if(window.scrollY>50){
-      scrollDownToggle.small= true
-    }else{
-      scrollDownToggle.small= false
-    }
-    //section0
-    //控制對話泡泡的出現否
-    chatboxWrap.value.offsetTop>100 ? chatboxToggle.item0=true : chatboxToggle.item0=false
-    chatboxWrap.value.offsetTop>200 ? chatboxToggle.item1=true : chatboxToggle.item1=false
-    chatboxWrap.value.offsetTop>300 ? chatboxToggle.item2=true : chatboxToggle.item2=false
-    chatboxWrap.value.offsetTop>400 ? chatboxToggle.item3=true : chatboxToggle.item3=false
-    chatboxWrap.value.offsetTop>500 ? chatboxToggle.item4=true : chatboxToggle.item4=false
-    chatboxWrap.value.offsetTop>550 ? chatboxToggle.item5=true : chatboxToggle.item5=false
+    
+    //滾動到最頂部時 操作滾動提示
+    if(window.scrollY>50) scrollDownToggle.small = true
+    else scrollDownToggle.small= false
 
-    //****section1
+    //section0 控制對話泡泡的出現否
+    chatboxToggle.item0 = chatboxWrap.value.offsetTop > 100 ? true : false
+    chatboxToggle.item1 = chatboxWrap.value.offsetTop > 200 ? true : false
+    chatboxToggle.item2 = chatboxWrap.value.offsetTop > 300 ? true : false
+    chatboxToggle.item3 = chatboxWrap.value.offsetTop > 400 ? true : false
+    chatboxToggle.item4 = chatboxWrap.value.offsetTop > 500 ? true : false
+    chatboxToggle.item5 = chatboxWrap.value.offsetTop > 600 ? true : false
+
+    //****section1 轉場
     section1_hero.value.style.opacity = section1_items.value.offsetTop/500  //得到0-1
-    section1_hero.value.style.width= section1_items.value.offsetTop/500 *(100-10)+ 10 +'vmax' //得到10-100
-    section1_hero.value.style.height= section1_items.value.offsetTop/500 *(100-10)+ 10 +'vmax'
-    if (section1_items.value.getBoundingClientRect().top == 0){
-    }
+    section1_hero.value.style.width = section1_items.value.offsetTop/500 *(100-10)+ 10 +'vmax' //得到10-100
+    section1_hero.value.style.height = section1_items.value.offsetTop/500 *(100-10)+ 10 +'vmax'
+    section1Toggle.hero = section1_items.value.offsetTop <= 451 ? true : false
     
-    section1_items.value.offsetTop <= 451 ? section1Toggle.hero=true : section1Toggle.hero=false
-    
-    //****myExp
-    if(exp0.value.getBoundingClientRect().top < window.innerHeight*2/3){
-      myExp.exp0= true
-      // changeText('您好，我是祺翔，對於前端網頁設計開發有高度興趣，具一年以上前端網頁自學與開發經驗，讓我養成獨立解決問題的能力；結合攝影及多媒體影像處理專長，目前已從零到有獨立完成數個RWD Website/APP（敬請參考下方作品集與本網站），在前一份工作中也有維護管理網站經驗，並具備後端PHP與資料庫基礎知識，個性圓融合群，有信心能在團隊中快速進入狀況為公司貢獻所長。', 100, 30, 120)
+    //****myExp 主要介紹
+    if(exp0.value.getBoundingClientRect().top < window.innerHeight*2/3) {
+      myExp.exp0 = true
+      typewriterOrder1(typewriterDOM1.value, '您好，我是祺翔，對於網頁設計開發有高度興趣，具一年以上前端網頁自學與開發經驗，讓我養成獨立思考、拆解問題再解決問題的能力，')
+      typewriterOrder2(typewriterDOM2.value, '擅長攝影，也對影像品質有要求，結合影像處理專長，已從零到有獨立完成數個RWD Website/APP，敬請參考下方作品集，')
+      typewriterOrder3(typewriterDOM3.value, '另已具備後端PHP與MySQL、MongoDB的CRUD基礎，也開始摸索Node.js，了解路由和RestfulAPI設計概念，個性謹慎細心、圓融合群，在前一份工作中有維護管理網站經驗，也常要與工程師和使用者溝通，有信心能在新團隊中快速進入狀況並貢獻所長！')
     }
-    if(typewriterDOM1.value.getBoundingClientRect().top < window.innerHeight*2/3){
-      typewriterText1('您好，我是祺翔，對於網頁設計開發有高度興趣，具一年以上前端網頁自學與開發經驗，讓我養成獨立思考、拆解問題再解決問題的能力，',typewriterDOM1)
-      typewriterText2('擅長攝影，也對影像品質有要求，結合影像處理專長已從零到有獨立完成數個RWD Website/APP，敬請參考下方作品集與本網站，',typewriterDOM2)
-      typewriterText3('另已具備後端PHP與MySQL、MongoDB的CRUD基礎，也開始摸索Node.js，了解路由和RestfulAPI設計概念，個性謹慎細心、圓融合群，在前一份工作中有維護管理網站經驗，也常要與工程師和使用者溝通，有信心能在新團隊中快速進入狀況並貢獻所長！',typewriterDOM3)
-    }
-    if(exp1.value.getBoundingClientRect().top < window.innerHeight*2/3){
-      myExp.exp1= true
-    }
-    if(exp2.value.getBoundingClientRect().top < window.innerHeight*2/3){
-      myExp.exp2= true
-    }
-    if(exp3.value.getBoundingClientRect().top < window.innerHeight*2/3){
-      myExp.exp3= true
-    }
-    if(exp4.value.getBoundingClientRect().top < window.innerHeight*2/3){
-      myExp.exp4= true
-    }
-    if(exp5.value.getBoundingClientRect().top < window.innerHeight*2/3){
-      myExp.exp5= true
-    }
-    //****section2
+    if(exp1.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp1 = true
+    if(exp2.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp2 = true
+    if(exp3.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp3 = true
+    if(exp4.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp4 = true
+    if(exp5.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp5 = true
+    if(exp6.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp6 = true
+    if(exp7.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp7 = true
+
+    //****section2 興趣 橫向移動處理
     section2.value.style.height = (section2_items.value.scrollWidth)+'px' //讓section2的高度自動等於可以完整展示items的寬度
     if(section2.value.getBoundingClientRect().top < 0){
       section2_items.value.style.transform= `translateX(${section2.value.getBoundingClientRect().top}px)` //控制section2_items的translateX偏移=section2脫離可視範圍的距離
     }
-    //讓圖片在畫面左右兩側時rotate-20~20
+    //讓圖片在畫面左右兩側時rotate旋轉-20~20deg
     const innerWidthCenter = window.innerWidth/2
     section2_items_imgs.value.forEach(el => {
       let rotate =  Math.round(el.getBoundingClientRect().left / (window.innerWidth-el.getBoundingClientRect().width) *(20+20)-20 ) *-1
       rotate = rotate >= 20 ? 20 : rotate
       rotate = rotate <= -20 ? -20 : rotate
       el.style.transform = `rotateY(${rotate}deg)`
-    });
-    //****section3
-    section3_hero.value.style.width= Math.abs(section3_items.value.offsetTop*0.1-100)+0.5+'vmax' //0 =>100
-    section3_hero.value.style.height= Math.abs(section3_items.value.offsetTop*0.1-100)+0.5+'vmax' //1000 => 0
-    section3_items.value.offsetTop>=100 ? section3Toggle.hero=true : section3Toggle.hero=false
-    //滾動到最底部時
-    if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight-5){
-      scrollDownToggle.hide = true
-    }else{
-      scrollDownToggle.hide = false
-    }
+    })
+    //****section3 轉場
+    section3_hero.value.style.width = Math.abs(section3_items.value.offsetTop*0.1-100)+0.5+'vmax' //0 =>100
+    section3_hero.value.style.height = Math.abs(section3_items.value.offsetTop*0.1-100)+0.5+'vmax' //1000 => 0
+    section3Toggle.hero = section3_items.value.offsetTop >= 100 ? true : false
+    //滾動到最底部時 操作滾動提示隱藏
+    if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight-5) scrollDownToggle.hide = true
+    else scrollDownToggle.hide = false
   }
-  window.addEventListener('scroll',scrollHandler)
-  window.addEventListener('resize',scrollHandler)
+  window.addEventListener('scroll', scrollHandler)
+  window.addEventListener('resize', scrollHandler)
 })
 </script>
 
 <template>
   <div class="loadingfixed" ref="loadingfixed" @transitionend="loadingfixed.style.display='none'">
-    <div class="message">loading...</div>
+    <div class="message">Loading...</div>
     <div class="loading">
       <div class="rectangle"></div>
       <div class="rectangle"></div>
@@ -162,7 +152,6 @@ onMounted(()=>{
     </div>
   </div>
   <div class="scroll_down" :class="{hide:scrollDownToggle.hide,small:scrollDownToggle.small}" @click="section2Toggle.item2=!section2Toggle.item2">SCROLL DOWN</div>
-  <!-- <div class="heroText">{{ text }}</div> -->
 
 <div :class="{noScroll: noScroll}">
   <div class="section0">
@@ -176,19 +165,19 @@ onMounted(()=>{
       </div>
       <div class="chatbox">
         <div class="user remote" :class="{active:chatboxToggle.item1}">
-            <span class="txt">Hello!👋</span>    
+          <span class="txt">Hello!👋</span>    
         </div>
         <div class="user local" :class="{active:chatboxToggle.item2}">
-            <span class="txt">Hi!</span>    
+          <span class="txt">Hi!</span>    
         </div>
         <div class="user remote" :class="{active:chatboxToggle.item3}">
-            <span class="txt">聽說你們在徵<span class="red">前端工程師</span>?</span>    
+          <span class="txt">聽說你們在徵<span class="red">前端工程師</span>?</span>    
         </div>
         <div class="user local" :class="{active:chatboxToggle.item4}">
-            <span class="txt">對，沒錯!</span>    
+          <span class="txt">對，沒錯!</span>    
         </div>
         <div class="user remote" :class="{active:chatboxToggle.item5}">
-            <span class="txt">請給我幾分鐘的時間介紹自己✌</span>    
+          <span class="txt">請給我幾分鐘的時間介紹自己✌</span>    
         </div>
       </div>
     </div>
@@ -222,9 +211,67 @@ onMounted(()=>{
               <ul>
                 <li class="indent" ref="typewriterDOM3"></li>
               </ul>
-              <!-- <ul>
-                <li class="indent">{{ text }}</li><br>
-              </ul> -->
+            </div>
+          </div>
+        </div>
+        <div class="exp7" ref="exp7" :class="{active:myExp.exp7}">
+          <div class="exp_top">
+            <div class="top_left"><i class="fa-brands fa-github"></i></div>
+            <div class="top_right"><h3>近期作品 - 個人履歷網站</h3></div>
+          </div>
+          <div class="exp_bottom">
+            <div class="bottom_left"></div>
+            <div class="bottom_right">
+              <div class="buttons">
+                <a href="https://github.com/shiang0504/my-resume">
+                  <div class="title">Source Code <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+              </div>
+              <div class="image">
+                <img target=_blank src="./assets/my-resume-demo.png" alt="個人履歷網站" >
+              </div>
+              <ul class="skill">
+                <li><i class="fa-regular fa-circle-check"></i>VUE3</li>
+                <li><i class="fa-regular fa-circle-check"></i>RWD</li>
+                <li><i class="fa-regular fa-circle-check"></i>SCSS</li>
+              </ul>
+              <p>就是您目前瀏覽的網站，展示作品與履歷，</p>
+              <p>靈感來自Apple官網展示產品常利用position: sticky搭配scroll事件的效果，</p>
+              <p>希望您可以透過本網站的內容快速認識我。</p>
+            </div>
+          </div>
+        </div>
+        <div class="exp6" ref="exp6" :class="{active:myExp.exp6}">
+          <div class="exp_top">
+            <div class="top_left"><i class="fa-brands fa-github"></i></div>
+            <div class="top_right"><h3>近期作品 - 寵物認養網站APP</h3></div>
+          </div>
+          <div class="exp_bottom">
+            <div class="bottom_left"></div>
+            <div class="bottom_right">
+              <div class="buttons">
+                <a href="https://github.com/shiang0504/pet-finder">
+                  <div class="title">Source Code <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+                <a href="https://shiang0504.github.io/pet-finder">
+                  <div class="title fa-beat-fade">Live Demo <i class="fa-solid fa-arrow-up-right-from-square fa-beat-fade"></i></div>
+                </a>
+              </div>
+              <div class="image">
+                <a href="https://shiang0504.github.io/pet-finder"><img target=_blank src="./assets/pet-finder-demo.png" alt="領養不棄養" ></a>
+              </div>
+              <ul class="skill">
+                <li><i class="fa-regular fa-circle-check"></i>VUE3</li>
+                <li><i class="fa-regular fa-circle-check"></i>SPA</li>
+                <li><i class="fa-regular fa-circle-check"></i>串接API</li>
+                <li><i class="fa-regular fa-circle-check"></i>非同步處理</li>
+                <li><i class="fa-regular fa-circle-check"></i>RWD</li>
+                <li><i class="fa-regular fa-circle-check"></i>SCSS</li>
+              </ul>
+              <p>串接政府資料開放平臺「動物認領養」API，</p>
+              <p>把冷冰冰的資料用有趣的UI呈現，查詢待領養寵物的過程像在跟狗狗貓貓互動交朋友，</p>
+              <p>搭配RWD和觸控事件設計，手機用單手也方便操作，</p>
+              <p>可在喜愛收藏裡面查看待領養寵物的資訊，希望大家領養不棄養。</p>
             </div>
           </div>
         </div>
@@ -245,7 +292,7 @@ onMounted(()=>{
                 </a>
               </div>
               <div class="image">
-                <img target=_blank src="./assets/dessert-shop.jpg" alt="甜點店">
+                <a href="https://shiang0504.github.io/dessert-shop"><img target=_blank src="./assets/dessert-shop-demo.png" alt="甜點店"></a>
               </div>
               <ul class="skill">
                 <li><i class="fa-regular fa-circle-check"></i>VUE3</li>
@@ -278,7 +325,7 @@ onMounted(()=>{
                 </a>
               </div>
               <div class="image">
-                <img target=_blank src="./assets/calender-project.jpg" alt="萬年曆">
+                <a href="https://shiang0504.github.io/calender-project"><img target=_blank src="./assets/calender-project-demo.png" alt="行事曆"></a>
               </div>
               <ul class="skill">
                 <li><i class="fa-regular fa-circle-check"></i>VUE3</li>
@@ -310,14 +357,14 @@ onMounted(()=>{
                 </a>
               </div>
               <div class="image">
-                <img target=_blank src="./assets/image-studio-website.jpg" alt="工作室網站">
+                <a href="https://shiang0504.github.io/image-studio-website"><img target=_blank src="./assets/image-studio-website-demo.png" alt="工作室網站"></a>
               </div>
               <ul class="skill">
                 <li><i class="fa-regular fa-circle-check"></i>jQuery</li>
                 <li><i class="fa-regular fa-circle-check"></i>RWD</li>
                 <li><i class="fa-regular fa-circle-check"></i>SCSS</li>
               </ul>
-              <p>第一個網站，使用Javascript、jQuery、SCSS開發，</p>
+              <p>我的第一個網站，使用Javascript、jQuery、SCSS開發，</p>
               <p>展示作品及提供資訊的靜態網站，動畫使用jQuery完成。</p>
             </div>
           </div>
@@ -439,8 +486,6 @@ onMounted(()=>{
           <span v-else>聯絡信箱</span>
           </Transition>
         </p>
-        <!-- <p v-if="contentText" :class="{show:scrollDownToggle.hide}"><i class="fa-regular fa-envelope"></i>謝謝觀看</p> -->
-        <!-- <p v-else :class="{show:scrollDownToggle.hide}"><i class="fa-regular fa-envelope"></i>聯絡信箱</p> -->
         <p :class="{show:scrollDownToggle.hide}"><a href="mailto:shiang0504@gmail.com">shiang0504@gmail.com</a></p>
       </div>
       <div class="hero" ref="section3_hero" :class="{active:section3Toggle.hero}"></div>
@@ -491,6 +536,7 @@ onMounted(()=>{
       position: absolute;
       left: 8px;
       width: 16px;
+      border-radius: 8px;
       background: #ffffff;
       animation: loadingAnimation .5s cubic-bezier(0, 0.5, 0.5, 1) infinite;
       &:nth-child(1){
@@ -507,7 +553,7 @@ onMounted(()=>{
       }
     }
     @keyframes loadingAnimation{
-      0% { top: 8px;  height: 64px; }
+      0%        { top: 8px;  height: 64px; }
       50%, 100% { top: 24px; height: 32px; }
     }
   }
@@ -567,33 +613,9 @@ onMounted(()=>{
     100%{opacity: 0.1}
   }
 }
-// .heroText{
-//   position: fixed;
-//   width: 100%;
-//   top: 30px;
-//   left: 30px;
-//   color: rgb(255, 255, 255);
-//   -webkit-text-stroke: #000000 .5px;
-//   font-size: 50px;
-//   z-index: 99;
-//   &::after{
-//     content: '';
-//     width: 4px;
-//     height: 100%;
-//     background-color: rgb(121, 121, 121);
-//     position: absolute;
-//     animation: cursor infinite 1.2s;
-//     @keyframes cursor {
-//       0%,50%{opacity: 1;}
-//       51%,100%{opacity: 0;}
-//     }
-//   }
-//   @include tablet-768{
-//     font-size: 40px;
-//   }
-// }
+
 .section0{
-  height: calc(100vh + 500px);
+  height: calc(100vh + 600px);
   display: flex;
   justify-content: center;
   .chatboxWrap{
@@ -820,8 +842,6 @@ onMounted(()=>{
                 width: 100%;
                 height: 100%;
                 border-radius: 20px;
-                // object-fit: contain;
-                // object-fit: cover;
               }
               @include tablet-768{
                 margin: 10px;
@@ -1016,7 +1036,6 @@ onMounted(()=>{
                 }
                 img{
                   height: 100%;
-
                 }
               }
             }
@@ -1071,7 +1090,7 @@ onMounted(()=>{
           }
         }
       }
-      .exp3, .exp4, .exp5{
+      .exp3, .exp4, .exp5, .exp6, .exp7{
         flex: 1 0 auto;
         margin-bottom: 100px;
         padding: 30px;
@@ -1182,18 +1201,20 @@ onMounted(()=>{
               img{
                 width: 100%;
                 border-radius: 20px;
+                filter: drop-shadow(0px 0px 160px #055034);
               }
-              &::after{
-                content: '';
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                top: 10px;
-                left: 10px;
-                border-radius: 20px;
-                border: 1px solid white;
-                z-index: -1;
-              }
+              // &::after{
+              //   content: '';
+              //   position: absolute;
+              //   top: 10px;
+              //   left: 10px;
+              //   width: 80%;
+              //   height: 80%;
+              //   background: #a4c1b6;
+              //   border-radius: 20px;
+              //   border: 1px solid white;
+              //   z-index: -1;
+              // }
               @include tablet-768{
                 width: 100%;
               }
@@ -1210,7 +1231,7 @@ onMounted(()=>{
                 font-size: 20px;
                 line-height: 30px;
                 height: 30px;
-                background-color: #055034;;
+                background-color: #055034;
                 margin: 5px;
                 padding: 0px 5px;
                 border-radius: 30px;
