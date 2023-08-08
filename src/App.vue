@@ -38,6 +38,7 @@ const myExp = reactive({
   exp5: false,
   exp6: false,
   exp7: false,
+  exp8: false,
 })
 const section3Toggle = reactive({
   hero: false,
@@ -55,6 +56,7 @@ const exp4 = ref()
 const exp5 = ref()
 const exp6 = ref()
 const exp7 = ref()
+const exp8 = ref()
 const section2 = ref()
 const section2_items = ref()
 const section2_items_imgs = ref([])
@@ -115,6 +117,7 @@ onMounted(()=>{
     if(exp5.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp5 = true
     if(exp6.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp6 = true
     if(exp7.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp7 = true
+    if(exp8.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp8 = true
 
     //****section2 興趣 橫向移動處理
     section2.value.style.height = (section2_items.value.scrollWidth)+'px' //讓section2的高度自動等於可以完整展示items的寬度
@@ -214,30 +217,35 @@ onMounted(()=>{
             </div>
           </div>
         </div>
-        <div class="exp7" ref="exp7" :class="{active:myExp.exp7}">
+        <div class="exp8" ref="exp8" :class="{active:myExp.exp8}">
           <div class="exp_top">
             <div class="top_left"><i class="fa-brands fa-github"></i></div>
-            <div class="top_right"><h3>近期作品 - 個人履歷網站</h3></div>
+            <div class="top_right"><h3>近期作品 - 臺北市YouBike2.0地圖</h3></div>
           </div>
           <div class="exp_bottom">
             <div class="bottom_left"></div>
             <div class="bottom_right">
               <div class="buttons">
-                <a href="https://github.com/shiang0504/my-resume">
+                <a href="https://github.com/shiang0504/ubike-map">
                   <div class="title">Source Code <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+                <a href="https://shiang0504.github.io/ubike-map">
+                  <div class="title fa-beat-fade">Live Demo <i class="fa-solid fa-arrow-up-right-from-square fa-beat-fade"></i></div>
                 </a>
               </div>
               <div class="image">
-                <img target=_blank src="./assets/my-resume-demo.png" alt="個人履歷網站" >
+                <a href="https://shiang0504.github.io/ubike-map"><img target=_blank src="./assets/ubike-map-demo.png" alt="ubike-map" ></a>
               </div>
               <ul class="skill">
                 <li><i class="fa-regular fa-circle-check"></i>VUE3</li>
+                <li><i class="fa-regular fa-circle-check"></i>SPA</li>
+                <li><i class="fa-regular fa-circle-check"></i>串接API</li>
+                <li><i class="fa-regular fa-circle-check"></i>非同步處理</li>
                 <li><i class="fa-regular fa-circle-check"></i>RWD</li>
                 <li><i class="fa-regular fa-circle-check"></i>SCSS</li>
               </ul>
-              <p>就是您目前瀏覽的網站，展示作品與履歷，</p>
-              <p>靈感來自Apple官網展示產品常利用position: sticky搭配scroll事件的效果，</p>
-              <p>希望您可以透過本網站的內容快速認識我。</p>
+              <p>將政府資料開放平臺「YouBike2.0臺北市公共自行車即時資訊」資料和Leaflet API結合</p>
+              <p>自動定位或自行滑動查詢附近YouBike站點使用情況。</p>
             </div>
           </div>
         </div>
@@ -369,6 +377,33 @@ onMounted(()=>{
             </div>
           </div>
         </div>
+        <div class="exp7" ref="exp7" :class="{active:myExp.exp7}">
+          <div class="exp_top">
+            <div class="top_left"><i class="fa-brands fa-github"></i></div>
+            <div class="top_right"><h3>近期作品 - 個人履歷網站</h3></div>
+          </div>
+          <div class="exp_bottom">
+            <div class="bottom_left"></div>
+            <div class="bottom_right">
+              <div class="buttons">
+                <a href="https://github.com/shiang0504/my-resume">
+                  <div class="title">Source Code <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+              </div>
+              <div class="image">
+                <img target=_blank src="./assets/my-resume-demo.png" alt="個人履歷網站" >
+              </div>
+              <ul class="skill">
+                <li><i class="fa-regular fa-circle-check"></i>VUE3</li>
+                <li><i class="fa-regular fa-circle-check"></i>RWD</li>
+                <li><i class="fa-regular fa-circle-check"></i>SCSS</li>
+              </ul>
+              <p>就是您目前瀏覽的網站，展示作品與履歷，</p>
+              <p>靈感來自Apple官網展示產品常利用position: sticky搭配scroll事件的效果，</p>
+              <p>希望您可以透過本網站的內容快速認識我。</p>
+            </div>
+          </div>
+        </div>
         <div class="exp2" ref="exp2" :class="{active:myExp.exp2}">
           <div class="exp_top">
             <div class="top_left"><i class="fa-brands fa-vuejs"></i></div>
@@ -482,7 +517,7 @@ onMounted(()=>{
       <div class="text">
         <p :class="{show:scrollDownToggle.hide}"><i class="fa-regular fa-envelope"></i>
           <Transition name="slideUp" mode="out-in">
-          <span v-if="contentText">謝謝觀看</span>
+          <span v-if="contentText">謝謝點閱</span>
           <span v-else>聯絡信箱</span>
           </Transition>
         </p>
@@ -782,7 +817,7 @@ onMounted(()=>{
         font-size: 30px;
         transform: translateX(30px);
         opacity: 0;
-        transition: all 1s;
+        transition: all .5s;
         .exp_top{
           flex: 0 0;
           display: flex;
@@ -809,15 +844,15 @@ onMounted(()=>{
             position: relative;
             font-size: 20px;
             left: -10px;
-            transition: max-height 1s 1s;
+            transition: max-height .5s .5s;
             &::after{
-              content: '<h3>';
+              content: '<div>';
               position: absolute;
               top: -30px;
               color: #616161;
             }
             &::before{
-              content: '</h3>';
+              content: '</div>';
               position: absolute;
               bottom: -30px;
               color: #616161;
@@ -828,7 +863,7 @@ onMounted(()=>{
             margin-left: 20px;
             transform: translateX(-30px);
             opacity: 0;
-            transition: all 1s 2s;
+            transition: all .5s 1s;
             display: flex;
             align-items: center;
             @include tablet-768{
@@ -925,7 +960,7 @@ onMounted(()=>{
         font-size: 30px;
         transform: translateX(30px);
         opacity: 0;
-        transition: all 1s;
+        transition: all .5s;
         .exp_top{
           flex: 0 0;
           display: flex;
@@ -955,10 +990,10 @@ onMounted(()=>{
             left: 0;
             background-color: #055034;
             z-index: 1;
-            transition: height 1s 2s;
+            transition: height .5s 1s;
           }
           &::after{
-            content: '1 year';
+            content: '1年+';
             white-space: nowrap;
             height: 3px;
             width: 0%;
@@ -969,12 +1004,12 @@ onMounted(()=>{
             font-size: 20px;
             background-color: #055034;
             opacity: 0;
-            transition: opacity 1s 1s, width 1s 2s;
+            transition: opacity .5s .5s, width .5s 1s;
           }
           .bottom_content{
             width: 100%;
             opacity: 0;
-            transition: opacity 1s 3s;
+            transition: opacity .5s 1.5s;
             ul{
               li{
                 position: relative;
@@ -990,47 +1025,47 @@ onMounted(()=>{
                 border-radius: 0 20px 20px 0;
                 &:nth-child(1){
                   width: 0%;
-                  transition: width 3s 3s cubic-bezier(0.070, 0.975, 0.075, 0.845);
+                  transition: width 1.5s 1.5s cubic-bezier(0.070, 0.975, 0.075, 0.845);
                   background-color: #64d6ac;
                 }
                 &:nth-child(2){
                   width: 0%;
-                  transition: width 3s 3s cubic-bezier(0.070, 0.975, 0.075, 0.845);
+                  transition: width 1.5s 1.5s cubic-bezier(0.070, 0.975, 0.075, 0.845);
                   background-color: #59c09a;
                 }
                 &:nth-child(3){
                   width: 0%;
-                  transition: width 3s 3.1s cubic-bezier(0.070, 0.975, 0.075, 0.845);
+                  transition: width 1.5s 1.6s cubic-bezier(0.070, 0.975, 0.075, 0.845);
                   background-color: #51af8c;
                 }
                 &:nth-child(4){
                   width: 0%;
-                  transition: width 3s 3.2s cubic-bezier(0.070, 0.975, 0.075, 0.845);
+                  transition: width 1.5s 1.7s cubic-bezier(0.070, 0.975, 0.075, 0.845);
                   background-color: #459678;
                 }
                 &:nth-child(5){
                   width: 0%;
-                  transition: width 3s 3.3s cubic-bezier(0.070, 0.975, 0.075, 0.845);
+                  transition: width 1.5s 1.8s cubic-bezier(0.070, 0.975, 0.075, 0.845);
                   background-color: #3c8268;
                 }
                 &:nth-child(6){
                   width: 0%;
-                  transition: width 3s 3.4s cubic-bezier(0.070, 0.975, 0.075, 0.845);
+                  transition: width 1.5s 1.9s cubic-bezier(0.070, 0.975, 0.075, 0.845);
                   background-color: #37765f;
                 }
                 &:nth-child(7){
                   width: 0%;
-                  transition: width 3s 3.4s cubic-bezier(0.070, 0.975, 0.075, 0.845);
+                  transition: width 1.5s 2.0s cubic-bezier(0.070, 0.975, 0.075, 0.845);
                   background-color: #2d604d;
                 }
                 &:nth-child(8){
                   width: 0%;
-                  transition: width 3s 3.4s cubic-bezier(0.070, 0.975, 0.075, 0.845);
+                  transition: width 1.5s 2.1s cubic-bezier(0.070, 0.975, 0.075, 0.845);
                   background-color: #265040;
                 }
                 &:nth-child(9){
                   width: 0%;
-                  transition: width 3s 3.4s cubic-bezier(0.070, 0.975, 0.075, 0.845);
+                  transition: width 1.5s 2.2s cubic-bezier(0.070, 0.975, 0.075, 0.845);
                   background-color: #1f4033;
                   margin-bottom: 40px;
                 }
@@ -1090,7 +1125,7 @@ onMounted(()=>{
           }
         }
       }
-      .exp3, .exp4, .exp5, .exp6, .exp7{
+      .exp3, .exp4, .exp5, .exp6, .exp7, .exp8{
         flex: 1 0 auto;
         margin-bottom: 100px;
         padding: 30px;
@@ -1103,7 +1138,7 @@ onMounted(()=>{
         font-size: 30px;
         transform: translateX(30px);
         opacity: 0;
-        transition: all 1s;
+        transition: all .5s;
         .exp_top{
           flex: 0 0;
           display: flex;
@@ -1130,7 +1165,7 @@ onMounted(()=>{
             position: relative;
             font-size: 20px;
             left: -10px;
-            transition:max-height 1s 1s;
+            transition: max-height .5s .5s;
             &::after{
               content: '<h3>';
               position: absolute;
@@ -1149,7 +1184,7 @@ onMounted(()=>{
             margin-left: 20px;
             opacity: 0;
             transform: translateX(-30px);
-            transition: all 1s 2s;
+            transition: all .5s 1s;
             .buttons{
               display: flex;
               justify-content: center;

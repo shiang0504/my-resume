@@ -1,7 +1,7 @@
 let time = 2000 // 公有 第二個以後呼叫的會從第一個呼叫的總延遲時間繼續累計
 const typewriter=()=>{
     let available = true //私有變數，每個觸發一次
-    return (DOM, text, pushIntervalMin=0, pushIntervalMax=100)=>{
+    return (DOM, text, pushIntervalMin=0, pushIntervalMax=50)=>{
         if(available) {
             for (let i=0; i<text.length; i++) { //產生N個(字串長度決定)的setTimeout計時器
                 const random = Math.round(Math.random()*(pushIntervalMax-pushIntervalMin)+pushIntervalMin) //隨機取得最慢~最快的間隔時間
