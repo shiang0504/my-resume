@@ -2,6 +2,9 @@
 import { ref, reactive, onMounted } from 'vue'
 import { typewriterOrder1, typewriterOrder2, typewriterOrder3 } from './JS/typewriter.js'
 
+import { useMouseTracker } from './composables/mouseTracker'
+const mouse_slow = useMouseTracker(10)
+
 const noScroll = ref(true)
 const loadingfixed = ref(null)
 const chatboxToggle1 = ref(null)
@@ -106,9 +109,9 @@ onMounted(()=>{
     //****myExp 主要介紹
     if(exp0.value.getBoundingClientRect().top < window.innerHeight*2/3) {
       myExp.exp0 = true
-      typewriterOrder1(typewriterDOM1.value, '您好，我是祺翔，對於網頁設計開發有高度興趣，具一年以上前端網頁自學與開發經驗，讓我養成獨立思考、拆解問題再解決問題的能力，')
-      typewriterOrder2(typewriterDOM2.value, '擅長攝影，也對影像品質有要求，結合影像處理專長，已從零到有獨立完成數個RWD Website/APP，敬請參考下方作品集，')
-      typewriterOrder3(typewriterDOM3.value, '另已具備後端PHP與MySQL、MongoDB的CRUD基礎，也開始摸索Node.js，了解路由和RestfulAPI設計概念，個性謹慎細心、圓融合群，在前一份工作中有維護管理網站經驗，也常要與工程師和使用者溝通，有信心能在新團隊中快速進入狀況並貢獻所長！')
+      // typewriterOrder1(typewriterDOM1.value, '您好，我是祺翔，對於網頁設計開發有高度興趣，具一年以上前端網頁自學與開發經驗，讓我養成獨立思考、拆解問題再解決問題的能力，')
+      // typewriterOrder2(typewriterDOM2.value, '擅長攝影，也對影像品質有要求，結合影像處理專長，已從零到有獨立完成數個RWD Website/APP，敬請參考下方作品集，')
+      // typewriterOrder3(typewriterDOM3.value, '另已具備後端PHP與MySQL、MongoDB的CRUD基礎，也開始摸索Node.js，了解路由和RestfulAPI設計概念，個性謹慎細心、圓融合群，在前一份工作中有維護管理網站經驗，也常要與工程師和使用者溝通，有信心能在新團隊中快速進入狀況並貢獻所長！')
     }
     if(exp1.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp1 = true
     if(exp2.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp2 = true
@@ -206,13 +209,19 @@ onMounted(()=>{
                 <img src="./assets/photo.jpg" alt="">
               </div>
               <ul>
-                <li class="indent" ref="typewriterDOM1"></li>
+                <li class="indent" ref="typewriterDOM1">
+                  您好，我是祺翔，對於網頁設計開發有高度興趣，具一年以上前端網頁自學與開發經驗，讓我養成獨立思考、拆解問題再解決問題的能力，
+                </li>
               </ul>
               <ul>
-                <li class="indent" ref="typewriterDOM2"></li>
+                <li class="indent" ref="typewriterDOM2">
+                  擅長攝影，也對影像品質有要求，結合影像處理專長，已從零到有獨立完成數個RWD Website/APP，敬請參考下方作品集，
+                </li>
               </ul>
               <ul>
-                <li class="indent" ref="typewriterDOM3"></li>
+                <li class="indent" ref="typewriterDOM3">
+                  另已具備後端PHP與MySQL、MongoDB的CRUD基礎，也開始摸索Node.js，了解路由和RestfulAPI設計概念，個性謹慎細心、圓融合群，在前一份工作中有維護管理網站經驗，也常要與工程師和使用者溝通，有信心能在新團隊中快速進入狀況並貢獻所長！
+                </li>
               </ul>
             </div>
           </div>
@@ -333,7 +342,7 @@ onMounted(()=>{
                 </a>
               </div>
               <div class="image">
-                <a href="https://shiang0504.github.io/calender-project"><img target=_blank src="./assets/calender-project-demo.png" alt="行事曆"></a>
+                <a href="https://shiang0504.github.io/calender-project"><img src="./assets/calender-project-demo.png" alt="行事曆"></a>
               </div>
               <ul class="skill">
                 <li><i class="fa-regular fa-circle-check"></i>VUE3</li>
@@ -461,52 +470,54 @@ onMounted(()=>{
   </div>
   <div class="section2" ref="section2">
     <div class="stickyer">
+      <div :style="mouse_slow.mouseTranslate()">
       <div class="section2_items" ref="section2_items">
-        <div class="title">其他專長與興趣</div>
-        <div class="item">
-          <div class="image" :ref="(el)=>section2_items_imgs.push(el)">
-            <img src="./assets/food-1.jpg" alt="">
+          <div class="title">其他專長與興趣</div>
+          <div class="item">
+            <div class="image" :ref="(el)=>section2_items_imgs.push(el)">
+              <img src="./assets/food-1.jpg" alt="">
+            </div>
+            <div class="imageSub" :ref="(el)=>section2_items_imgs.push(el)">
+              <img src="./assets/food-2.jpg" alt="">
+            </div>
+            <div class="content">#美食攝影</div>
           </div>
-          <div class="imageSub" :ref="(el)=>section2_items_imgs.push(el)">
-            <img src="./assets/food-2.jpg" alt="">
+          <div class="item">
+            <div class="image" :ref="(el)=>section2_items_imgs.push(el)">
+              <img src="./assets/commodity-1.jpg" alt="">
+            </div>
+            <div class="imageSub" :ref="(el)=>section2_items_imgs.push(el)">
+              <img src="./assets/commodity-2.jpg" alt="">
+            </div>
+            <div class="content">#商品攝影</div>
           </div>
-          <div class="content">#美食攝影</div>
-        </div>
-        <div class="item">
-          <div class="image" :ref="(el)=>section2_items_imgs.push(el)">
-            <img src="./assets/commodity-1.jpg" alt="">
+          <div class="item">
+            <div class="image" :ref="(el)=>section2_items_imgs.push(el)">
+              <video src="./assets/omega.mp4" loop autoplay muted playsinline></video>
+            </div>
+            <div class="imageSub" :ref="(el)=>section2_items_imgs.push(el)">
+              <video src="./assets/burger.mp4" loop autoplay muted playsinline></video>
+            </div>
+            <div class="content">#影片拍攝&剪輯</div>
           </div>
-          <div class="imageSub" :ref="(el)=>section2_items_imgs.push(el)">
-            <img src="./assets/commodity-2.jpg" alt="">
+          <div class="item">
+            <div class="image" :ref="(el)=>section2_items_imgs.push(el)">
+              <img src="./assets/dog-1.jpg" alt="">
+            </div>
+            <div class="imageSub" :ref="(el)=>section2_items_imgs.push(el)">
+              <img src="./assets/dog-2.jpg" alt="">
+            </div>
+            <div class="content">#犬派</div>
           </div>
-          <div class="content">#商品攝影</div>
-        </div>
-        <div class="item">
-          <div class="image" :ref="(el)=>section2_items_imgs.push(el)">
-            <video src="./assets/omega.mp4" loop autoplay muted playsinline></video>
+          <div class="item">
+            <div class="image" :ref="(el)=>section2_items_imgs.push(el)">
+              <img src="./assets/coffee-1.jpg" alt="">
+            </div>
+            <div class="imageSub" :ref="(el)=>section2_items_imgs.push(el)">
+              <img src="./assets/coffee-2.jpg" alt="">
+            </div>
+            <div class="content">#Coffee Art</div>
           </div>
-          <div class="imageSub" :ref="(el)=>section2_items_imgs.push(el)">
-            <video src="./assets/burger.mp4" loop autoplay muted playsinline></video>
-          </div>
-          <div class="content">#影片拍攝&剪輯</div>
-        </div>
-        <div class="item">
-          <div class="image" :ref="(el)=>section2_items_imgs.push(el)">
-            <img src="./assets/dog-1.jpg" alt="">
-          </div>
-          <div class="imageSub" :ref="(el)=>section2_items_imgs.push(el)">
-            <img src="./assets/dog-2.jpg" alt="">
-          </div>
-          <div class="content">#狗派</div>
-        </div>
-        <div class="item">
-          <div class="image" :ref="(el)=>section2_items_imgs.push(el)">
-            <img src="./assets/coffee-1.jpg" alt="">
-          </div>
-          <div class="imageSub" :ref="(el)=>section2_items_imgs.push(el)">
-            <img src="./assets/coffee-2.jpg" alt="">
-          </div>
-          <div class="content">#Coffee Art</div>
         </div>
       </div>
     </div>
@@ -938,7 +949,7 @@ onMounted(()=>{
           }
           .img{
             width: 20vmin;
-            height: 30vmin;
+            height: auto;
               img{
                 object-position: center 20%;
                 width: 100%;
@@ -1233,10 +1244,10 @@ onMounted(()=>{
               margin: 30px auto;
               position: relative;
               font-size: 0;
+              filter: drop-shadow(0px 0px 100px #055034);
               img{
                 width: 100%;
                 border-radius: 20px;
-                filter: drop-shadow(0px 0px 160px #055034);
               }
               // &::after{
               //   content: '';
@@ -1307,7 +1318,7 @@ onMounted(()=>{
   .stickyer{
     position: sticky;
     top: 0;
-    overflow-x: hidden;
+    overflow: hidden;
   }
   .section2_items{
     height: 100vh;
