@@ -1,6 +1,6 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
-import { typewriterOrder1, typewriterOrder2, typewriterOrder3 } from './JS/typewriter.js'
+// import { typewriterOrder1, typewriterOrder2, typewriterOrder3 } from './JS/typewriter.js'
 
 import { useMouseTracker } from './composables/mouseTracker'
 const mouse_slow = useMouseTracker(10)
@@ -42,6 +42,7 @@ const myExp = reactive({
   exp6: false,
   exp7: false,
   exp8: false,
+  exp9: false,
 })
 const section3Toggle = reactive({
   hero: false,
@@ -60,6 +61,7 @@ const exp5 = ref()
 const exp6 = ref()
 const exp7 = ref()
 const exp8 = ref()
+const exp9 = ref()
 const section2 = ref()
 const section2_items = ref()
 const section2_items_imgs = ref([])
@@ -72,7 +74,7 @@ onMounted(()=>{
   setTimeout(()=>{
     loadingfixed.value.style.transform = 'translateY(-100%)';
     noScroll.value = false
-  }, 1000)
+  }, 100)
   // 最後面的文字循環
   setInterval(()=>{
     contentText.value = !contentText.value
@@ -119,8 +121,9 @@ onMounted(()=>{
     if(exp4.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp4 = true
     if(exp5.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp5 = true
     if(exp6.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp6 = true
-    if(exp7.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp7 = true
+    // if(exp7.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp7 = true
     if(exp8.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp8 = true
+    if(exp9.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp9 = true
 
     //****section2 興趣 橫向移動處理
     section2.value.style.height = (section2_items.value.scrollWidth)+'px' //讓section2的高度自動等於可以完整展示items的寬度
@@ -226,6 +229,40 @@ onMounted(()=>{
             </div>
           </div>
         </div>
+        <div class="exp9" ref="exp9" :class="{active:myExp.exp9}">
+          <div class="exp_top">
+            <div class="top_left"><i class="fa-brands fa-github"></i></div>
+            <div class="top_right"><h3>近期作品 - 112年臺北市出生死亡人口統計</h3></div>
+          </div>
+          <div class="exp_bottom">
+            <div class="bottom_left"></div>
+            <div class="bottom_right">
+              <div class="buttons">
+                <a href="https://github.com/shiang0504/chart">
+                  <div class="title">Source Code <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+                <a href="https://shiang0504.github.io/chart">
+                  <div class="title fa-beat-fade">Live Demo <i class="fa-solid fa-arrow-up-right-from-square fa-beat-fade"></i></div>
+                </a>
+              </div>
+              <div class="image">
+                <a href="https://shiang0504.github.io/chart"><img target=_blank src="./assets/chart-demo.png" alt="chart" ></a>
+              </div>
+              <ul class="skill">
+                <li class="library"><i class="fa-regular fa-circle-check"></i>VUE3</li>
+                <li class="library"><i class="fa-regular fa-circle-check"></i>Chartjs</li>
+                <li><i class="fa-regular fa-circle-check"></i>SPA</li>
+                <li><i class="fa-regular fa-circle-check"></i>串接API</li>
+                <li><i class="fa-regular fa-circle-check"></i>非同步處理</li>
+                <li><i class="fa-regular fa-circle-check"></i>RWD</li>
+                <li><i class="fa-regular fa-circle-check"></i>SCSS</li>
+              </ul>
+              <p>從政府資料開放平臺「各村（里）人口統計月報表（含同婚）」同時取得多筆資料</p>
+              <p>將資料結構修改及統計後，透過Chartjs繪出canvas，</p>
+              <p>使資料視覺化，變成易讀的長條、圓餅、折線圖。</p>
+            </div>
+          </div>
+        </div>
         <div class="exp8" ref="exp8" :class="{active:myExp.exp8}">
           <div class="exp_top">
             <div class="top_left"><i class="fa-brands fa-github"></i></div>
@@ -246,15 +283,18 @@ onMounted(()=>{
                 <a href="https://shiang0504.github.io/ubike-map"><img target=_blank src="./assets/ubike-map-demo.png" alt="ubike-map" ></a>
               </div>
               <ul class="skill">
-                <li><i class="fa-regular fa-circle-check"></i>VUE3</li>
+                <li class="library"><i class="fa-regular fa-circle-check"></i>VUE3</li>
+                <li class="library"><i class="fa-regular fa-circle-check"></i>Leafletjs</li>
+                <li class="library"><i class="fa-regular fa-circle-check"></i>D3js</li>
                 <li><i class="fa-regular fa-circle-check"></i>SPA</li>
                 <li><i class="fa-regular fa-circle-check"></i>串接API</li>
                 <li><i class="fa-regular fa-circle-check"></i>非同步處理</li>
                 <li><i class="fa-regular fa-circle-check"></i>RWD</li>
                 <li><i class="fa-regular fa-circle-check"></i>SCSS</li>
               </ul>
-              <p>將政府資料開放平臺「YouBike2.0臺北市公共自行車即時資訊」資料和Leaflet API結合</p>
+              <p>將政府資料開放平臺「YouBike2.0臺北市公共自行車即時資訊」資料和Leaflet API結合，</p>
               <p>自動定位或自行滑動查詢附近YouBike站點使用情況。</p>
+              <p>另統計各區租借情況並透過D3js繪出堆疊長條圖。</p>
             </div>
           </div>
         </div>
@@ -278,7 +318,7 @@ onMounted(()=>{
                 <a href="https://shiang0504.github.io/pet-finder"><img target=_blank src="./assets/pet-finder-demo.png" alt="領養不棄養" ></a>
               </div>
               <ul class="skill">
-                <li><i class="fa-regular fa-circle-check"></i>VUE3</li>
+                <li class="library"><i class="fa-regular fa-circle-check"></i>VUE3</li>
                 <li><i class="fa-regular fa-circle-check"></i>SPA</li>
                 <li><i class="fa-regular fa-circle-check"></i>串接API</li>
                 <li><i class="fa-regular fa-circle-check"></i>非同步處理</li>
@@ -312,7 +352,7 @@ onMounted(()=>{
                 <a href="https://shiang0504.github.io/dessert-shop"><img target=_blank src="./assets/dessert-shop-demo.png" alt="甜點店"></a>
               </div>
               <ul class="skill">
-                <li><i class="fa-regular fa-circle-check"></i>VUE3</li>
+                <li class="library"><i class="fa-regular fa-circle-check"></i>VUE3</li>
                 <li><i class="fa-regular fa-circle-check"></i>SPA</li>
                 <li><i class="fa-regular fa-circle-check"></i>Router</li>
                 <li><i class="fa-regular fa-circle-check"></i>RWD</li>
@@ -345,7 +385,7 @@ onMounted(()=>{
                 <a href="https://shiang0504.github.io/calender-project"><img src="./assets/calender-project-demo.png" alt="行事曆"></a>
               </div>
               <ul class="skill">
-                <li><i class="fa-regular fa-circle-check"></i>VUE3</li>
+                <li class="library"><i class="fa-regular fa-circle-check"></i>VUE3</li>
                 <li><i class="fa-regular fa-circle-check"></i>串接API</li>
                 <li><i class="fa-regular fa-circle-check"></i>非同步處理</li>
                 <li><i class="fa-regular fa-circle-check"></i>RWD</li>
@@ -377,7 +417,7 @@ onMounted(()=>{
                 <a href="https://shiang0504.github.io/image-studio-website"><img target=_blank src="./assets/image-studio-website-demo.png" alt="工作室網站"></a>
               </div>
               <ul class="skill">
-                <li><i class="fa-regular fa-circle-check"></i>jQuery</li>
+                <li class="library"><i class="fa-regular fa-circle-check"></i>jQuery</li>
                 <li><i class="fa-regular fa-circle-check"></i>RWD</li>
                 <li><i class="fa-regular fa-circle-check"></i>SCSS</li>
               </ul>
@@ -386,7 +426,7 @@ onMounted(()=>{
             </div>
           </div>
         </div>
-        <div class="exp7" ref="exp7" :class="{active:myExp.exp7}">
+        <!-- <div class="exp7" ref="exp7" :class="{active:myExp.exp7}">
           <div class="exp_top">
             <div class="top_left"><i class="fa-brands fa-github"></i></div>
             <div class="top_right"><h3>近期作品 - 個人履歷網站</h3></div>
@@ -412,7 +452,7 @@ onMounted(()=>{
               <p>希望您可以透過本網站的內容快速認識我。</p>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="exp2" ref="exp2" :class="{active:myExp.exp2}">
           <div class="exp_top">
             <div class="top_left"><i class="fa-brands fa-vuejs"></i></div>
@@ -1136,7 +1176,7 @@ onMounted(()=>{
           }
         }
       }
-      .exp3, .exp4, .exp5, .exp6, .exp7, .exp8{
+      .exp3, .exp4, .exp5, .exp6, .exp7, .exp8, .exp9{
         flex: 1 0 auto;
         margin-bottom: 100px;
         padding: 30px;
@@ -1281,6 +1321,9 @@ onMounted(()=>{
                 margin: 5px;
                 padding: 0px 5px;
                 border-radius: 30px;
+                &.library{
+                  background-color: #050e50;
+                }
                 i{
                   margin-right: 2px;
                 }
