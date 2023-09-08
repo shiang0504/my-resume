@@ -43,6 +43,7 @@ const myExp = reactive({
   exp7: false,
   exp8: false,
   exp9: false,
+  exp10: false,
 })
 const section3Toggle = reactive({
   hero: false,
@@ -62,6 +63,7 @@ const exp6 = ref()
 const exp7 = ref()
 const exp8 = ref()
 const exp9 = ref()
+const exp10 = ref()
 const section2 = ref()
 const section2_items = ref()
 const section2_items_imgs = ref([])
@@ -124,6 +126,7 @@ onMounted(()=>{
     // if(exp7.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp7 = true
     if(exp8.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp8 = true
     if(exp9.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp9 = true
+    if(exp10.value.getBoundingClientRect().top < window.innerHeight*2/3) myExp.exp10 = true
 
     //****section2 興趣 橫向移動處理
     section2.value.style.height = (section2_items.value.scrollWidth)+'px' //讓section2的高度自動等於可以完整展示items的寬度
@@ -229,7 +232,39 @@ onMounted(()=>{
             </div>
           </div>
         </div>
-        <div class="exp9" ref="exp9" :class="{active:myExp.exp9}">
+        <div class="project" ref="exp10" :class="{active:myExp.exp10}">
+          <div class="exp_top">
+            <div class="top_left"><i class="fa-brands fa-github"></i></div>
+            <div class="top_right"><h3>近期作品 - 手錶形象網站</h3></div>
+          </div>
+          <div class="exp_bottom">
+            <div class="bottom_left"></div>
+            <div class="bottom_right">
+              <div class="buttons">
+                <a href="https://github.com/shiang0504/watch-landingpage">
+                  <div class="title">Source Code <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                </a>
+                <a href="https://shiang0504.github.io/watch-landingpage">
+                  <div class="title fa-beat-fade">Live Demo <i class="fa-solid fa-arrow-up-right-from-square fa-beat-fade"></i></div>
+                </a>
+              </div>
+              <div class="image">
+                <a href="https://shiang0504.github.io/watch-landingpage"><img target=_blank src="./assets/watch-landingpage-demo.png" alt="近期作品 - 手錶形象網站"></a>
+
+                
+              </div>
+              <ul class="skill">
+                <li><i class="fa-regular fa-circle-check"></i>VUE3</li>
+                <li><i class="fa-regular fa-circle-check"></i>RWD</li>
+                <li><i class="fa-regular fa-circle-check"></i>SCSS</li>
+              </ul>
+              <p>靈感來自Apple官網，利用sticky、absolute排版搭配scroll事件做出的視覺效果，</p>
+              <p>並嘗試把邏輯封裝成Composables以便重複使用，</p>
+              <p>從拍攝剪輯到網站撰寫一手包辦完成。</p>
+            </div>
+          </div>
+        </div>
+        <div class="project" ref="exp9" :class="{active:myExp.exp9}">
           <div class="exp_top">
             <div class="top_left"><i class="fa-brands fa-github"></i></div>
             <div class="top_right"><h3>近期作品 - 112年臺北市出生死亡人口統計</h3></div>
@@ -246,7 +281,7 @@ onMounted(()=>{
                 </a>
               </div>
               <div class="image">
-                <a href="https://shiang0504.github.io/chart"><img target=_blank src="./assets/chart-demo.png" alt="chart" ></a>
+                <a href="https://shiang0504.github.io/chart"><img target=_blank src="./assets/chart-demo.png" alt="近期作品 - 112年臺北市出生死亡人口統計"></a>
               </div>
               <ul class="skill">
                 <li class="library"><i class="fa-regular fa-circle-check"></i>VUE3</li>
@@ -257,13 +292,13 @@ onMounted(()=>{
                 <li><i class="fa-regular fa-circle-check"></i>RWD</li>
                 <li><i class="fa-regular fa-circle-check"></i>SCSS</li>
               </ul>
-              <p>從政府資料開放平臺「各村（里）人口統計月報表（含同婚）」同時取得多筆資料</p>
-              <p>將資料結構修改及統計後，透過Chartjs繪出canvas，</p>
+              <p>從政府資料開放平臺「各村（里）人口統計月報表（含同婚）」取得多筆API資料，</p>
+              <p>將資料結構重新修改、統計後，透過Chartjs繪出canvas，</p>
               <p>使資料視覺化，變成易讀的長條、圓餅、折線圖。</p>
             </div>
           </div>
         </div>
-        <div class="exp8" ref="exp8" :class="{active:myExp.exp8}">
+        <div class="project" ref="exp8" :class="{active:myExp.exp8}">
           <div class="exp_top">
             <div class="top_left"><i class="fa-brands fa-github"></i></div>
             <div class="top_right"><h3>近期作品 - 臺北市YouBike2.0地圖</h3></div>
@@ -280,7 +315,7 @@ onMounted(()=>{
                 </a>
               </div>
               <div class="image">
-                <a href="https://shiang0504.github.io/ubike-map"><img target=_blank src="./assets/ubike-map-demo.png" alt="ubike-map" ></a>
+                <a href="https://shiang0504.github.io/ubike-map"><img target=_blank src="./assets/ubike-map-demo.png" alt="近期作品 - 臺北市YouBike2.0地圖"></a>
               </div>
               <ul class="skill">
                 <li class="library"><i class="fa-regular fa-circle-check"></i>VUE3</li>
@@ -298,7 +333,7 @@ onMounted(()=>{
             </div>
           </div>
         </div>
-        <div class="exp6" ref="exp6" :class="{active:myExp.exp6}">
+        <div class="project" ref="exp6" :class="{active:myExp.exp6}">
           <div class="exp_top">
             <div class="top_left"><i class="fa-brands fa-github"></i></div>
             <div class="top_right"><h3>近期作品 - 寵物認養網站APP</h3></div>
@@ -315,7 +350,7 @@ onMounted(()=>{
                 </a>
               </div>
               <div class="image">
-                <a href="https://shiang0504.github.io/pet-finder"><img target=_blank src="./assets/pet-finder-demo.png" alt="領養不棄養" ></a>
+                <a href="https://shiang0504.github.io/pet-finder"><img target=_blank src="./assets/pet-finder-demo.png" alt="近期作品 - 寵物認養網站APP"></a>
               </div>
               <ul class="skill">
                 <li class="library"><i class="fa-regular fa-circle-check"></i>VUE3</li>
@@ -332,7 +367,7 @@ onMounted(()=>{
             </div>
           </div>
         </div>
-        <div class="exp3" ref="exp3" :class="{active:myExp.exp3}">
+        <div class="project" ref="exp3" :class="{active:myExp.exp3}">
           <div class="exp_top">
             <div class="top_left"><i class="fa-brands fa-github"></i></div>
             <div class="top_right"><h3>近期作品 - 甜點購物網站APP</h3></div>
@@ -349,7 +384,7 @@ onMounted(()=>{
                 </a>
               </div>
               <div class="image">
-                <a href="https://shiang0504.github.io/dessert-shop"><img target=_blank src="./assets/dessert-shop-demo.png" alt="甜點店"></a>
+                <a href="https://shiang0504.github.io/dessert-shop"><img target=_blank src="./assets/dessert-shop-demo.png" alt="近期作品 - 甜點購物網站APP"></a>
               </div>
               <ul class="skill">
                 <li class="library"><i class="fa-regular fa-circle-check"></i>VUE3</li>
@@ -365,7 +400,7 @@ onMounted(()=>{
             </div>
           </div>
         </div>
-        <div class="exp4" ref="exp4" :class="{active:myExp.exp4}">
+        <div class="project" ref="exp4" :class="{active:myExp.exp4}">
           <div class="exp_top">
             <div class="top_left"><i class="fa-brands fa-github"></i></div>
             <div class="top_right"><h3>近期作品 - 行事曆APP</h3></div>
@@ -382,7 +417,7 @@ onMounted(()=>{
                 </a>
               </div>
               <div class="image">
-                <a href="https://shiang0504.github.io/calender-project"><img src="./assets/calender-project-demo.png" alt="行事曆"></a>
+                <a href="https://shiang0504.github.io/calender-project"><img src="./assets/calender-project-demo.png" alt="近期作品 - 行事曆APP"></a>
               </div>
               <ul class="skill">
                 <li class="library"><i class="fa-regular fa-circle-check"></i>VUE3</li>
@@ -397,7 +432,7 @@ onMounted(()=>{
             </div>
           </div>
         </div>
-        <div class="exp5" ref="exp5" :class="{active:myExp.exp5}">
+        <div class="project" ref="exp5" :class="{active:myExp.exp5}">
           <div class="exp_top">
             <div class="top_left"><i class="fa-brands fa-github"></i></div>
             <div class="top_right"><h3>近期作品 - 工作室網站website</h3></div>
@@ -414,7 +449,7 @@ onMounted(()=>{
                 </a>
               </div>
               <div class="image">
-                <a href="https://shiang0504.github.io/image-studio-website"><img target=_blank src="./assets/image-studio-website-demo.png" alt="工作室網站"></a>
+                <a href="https://shiang0504.github.io/image-studio-website"><img target=_blank src="./assets/image-studio-website-demo.png" alt="近期作品 - 工作室網站website"></a>
               </div>
               <ul class="skill">
                 <li class="library"><i class="fa-regular fa-circle-check"></i>jQuery</li>
@@ -426,7 +461,7 @@ onMounted(()=>{
             </div>
           </div>
         </div>
-        <!-- <div class="exp7" ref="exp7" :class="{active:myExp.exp7}">
+        <!-- <div class="project" ref="exp7" :class="{active:myExp.exp7}">
           <div class="exp_top">
             <div class="top_left"><i class="fa-brands fa-github"></i></div>
             <div class="top_right"><h3>近期作品 - 個人履歷網站</h3></div>
@@ -533,7 +568,7 @@ onMounted(()=>{
           </div>
           <div class="item">
             <div class="image" :ref="(el)=>section2_items_imgs.push(el)">
-              <video src="./assets/omega.mp4" loop autoplay muted playsinline></video>
+              <video src="./assets/video.mp4" loop autoplay muted playsinline></video>
             </div>
             <div class="imageSub" :ref="(el)=>section2_items_imgs.push(el)">
               <video src="./assets/burger.mp4" loop autoplay muted playsinline></video>
@@ -1176,7 +1211,7 @@ onMounted(()=>{
           }
         }
       }
-      .exp3, .exp4, .exp5, .exp6, .exp7, .exp8, .exp9{
+      .project{
         flex: 1 0 auto;
         margin-bottom: 100px;
         padding: 30px;
